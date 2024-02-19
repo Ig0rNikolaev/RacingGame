@@ -8,9 +8,24 @@
 import UIKit
 import SnapKit
 
-class StarViewController: UIViewController {
+final class StarViewController: UIViewController {
 
     //: MARK: - UI Elements
+
+    private lazy var startButton: StartSceneButton = {
+        let button = StartSceneButton(configurationButton: .start)
+        return button
+    }()
+
+    private lazy var startSetting: StartSceneButton = {
+        let button = StartSceneButton(configurationButton: .setting)
+        return button
+    }()
+
+    private lazy var startRecord: StartSceneButton = {
+        let button = StartSceneButton(configurationButton: .record)
+        return button
+    }()
 
     //: MARK: - Lifecycle
 
@@ -26,15 +41,20 @@ class StarViewController: UIViewController {
     //: MARK: - Setups
 
     private func setupView() {
-        view.backgroundColor = .blue
+        view.backgroundColor = .systemGray6
         navigationController?.isNavigationBarHidden = true
     }
 
     private func setupHierarchy() {
-
+        view.addSubview(startButton)
     }
 
     private func setupLayout() {
-
+        startButton.snp.makeConstraints { make in
+            make.centerX.equalTo(view.snp.centerX)
+            make.centerY.equalTo(view.snp.centerY)
+            make.width.equalTo(300)
+            make.height.equalTo(150)
+        }
     }
 }

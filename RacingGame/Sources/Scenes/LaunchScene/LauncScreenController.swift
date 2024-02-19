@@ -9,8 +9,9 @@ import UIKit
 import SnapKit
 
 fileprivate enum Constants {
-    // Images
+    // String
     static let launchImage = "lauching"
+    static let transitionKey = "transition"
 
     // Layouts
     static let launchImageWidth = 300
@@ -20,6 +21,7 @@ fileprivate enum Constants {
     static let launchImageDuration = 1.0
     static let launchImageDelay = 0.0
     static let launchImageAlpha = 0.0
+    static let transitionDuration = 0.5
 }
 
 final class LauncScreenController: UIViewController {
@@ -61,7 +63,7 @@ final class LauncScreenController: UIViewController {
 
     private func animatesTransition() -> CATransition {
         let transition = CATransition()
-        transition.duration = 0.5
+        transition.duration = Constants.transitionDuration
         transition.type = CATransitionType.push
         transition.subtype = CATransitionSubtype.fromLeft
         return transition
@@ -70,7 +72,7 @@ final class LauncScreenController: UIViewController {
     private func transitionToStartScreen() {
         if let navigationController {
             let startController = StarViewController()
-            navigationController.view.layer.add(animatesTransition(), forKey: "transition")
+            navigationController.view.layer.add(animatesTransition(), forKey: Constants.transitionKey)
             navigationController.pushViewController(startController, animated: false)
         }
     }
