@@ -10,7 +10,6 @@
 		DBA0E6B02B8377EA003CF733 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBA0E6AF2B8377EA003CF733 /* AppDelegate.swift */; };
 		DBA0E6B22B8377EA003CF733 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBA0E6B12B8377EA003CF733 /* SceneDelegate.swift */; };
 		DBA0E6B42B8377EA003CF733 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBA0E6B32B8377EA003CF733 /* ViewController.swift */; };
-		DBA0E6B72B8377EA003CF733 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DBA0E6B52B8377EA003CF733 /* Main.storyboard */; };
 		DBA0E6B92B8377EB003CF733 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DBA0E6B82B8377EB003CF733 /* Assets.xcassets */; };
 		DBA0E6BC2B8377EB003CF733 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DBA0E6BA2B8377EB003CF733 /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
@@ -20,7 +19,6 @@
 		DBA0E6AF2B8377EA003CF733 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DBA0E6B12B8377EA003CF733 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		DBA0E6B32B8377EA003CF733 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		DBA0E6B62B8377EA003CF733 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		DBA0E6B82B8377EB003CF733 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DBA0E6BB2B8377EB003CF733 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		DBA0E6BD2B8377EB003CF733 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -56,15 +54,38 @@
 		DBA0E6AE2B8377EA003CF733 /* RacingGame */ = {
 			isa = PBXGroup;
 			children = (
+				DBA0E6C52B837F53003CF733 /* Resources */,
+				DBA0E6C32B837F0F003CF733 /* Sources */,
+			);
+			path = RacingGame;
+			sourceTree = "<group>";
+		};
+		DBA0E6C32B837F0F003CF733 /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				DBA0E6C42B837F1C003CF733 /* App */,
+				DBA0E6B32B8377EA003CF733 /* ViewController.swift */,
+			);
+			path = Sources;
+			sourceTree = "<group>";
+		};
+		DBA0E6C42B837F1C003CF733 /* App */ = {
+			isa = PBXGroup;
+			children = (
 				DBA0E6AF2B8377EA003CF733 /* AppDelegate.swift */,
 				DBA0E6B12B8377EA003CF733 /* SceneDelegate.swift */,
-				DBA0E6B32B8377EA003CF733 /* ViewController.swift */,
-				DBA0E6B52B8377EA003CF733 /* Main.storyboard */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		DBA0E6C52B837F53003CF733 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
 				DBA0E6B82B8377EB003CF733 /* Assets.xcassets */,
 				DBA0E6BA2B8377EB003CF733 /* LaunchScreen.storyboard */,
 				DBA0E6BD2B8377EB003CF733 /* Info.plist */,
 			);
-			path = RacingGame;
+			path = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -127,7 +148,6 @@
 			files = (
 				DBA0E6BC2B8377EB003CF733 /* LaunchScreen.storyboard in Resources */,
 				DBA0E6B92B8377EB003CF733 /* Assets.xcassets in Resources */,
-				DBA0E6B72B8377EA003CF733 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -147,14 +167,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		DBA0E6B52B8377EA003CF733 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				DBA0E6B62B8377EA003CF733 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		DBA0E6BA2B8377EB003CF733 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -294,12 +306,12 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = YC77Y2RPN5;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = RacingGame/Info.plist;
+				INFOPLIST_FILE = RacingGame/Resources/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -322,12 +334,12 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = YC77Y2RPN5;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = RacingGame/Info.plist;
+				INFOPLIST_FILE = RacingGame/Resources/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
