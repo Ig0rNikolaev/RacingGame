@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class LauncScreenController: UIViewController {
 
     //: MARK: - UI Elements
 
