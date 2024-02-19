@@ -13,6 +13,8 @@
 		DBA0E6B42B8377EA003CF733 /* LauncScreenController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBA0E6B32B8377EA003CF733 /* LauncScreenController.swift */; };
 		DBA0E6B92B8377EB003CF733 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DBA0E6B82B8377EB003CF733 /* Assets.xcassets */; };
 		DBA0E6BC2B8377EB003CF733 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DBA0E6BA2B8377EB003CF733 /* LaunchScreen.storyboard */; };
+		DBC1A6432B83B31D00B75E3C /* StarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC1A6422B83B31D00B75E3C /* StarViewController.swift */; };
+		DBC1A6462B83C01000B75E3C /* DemoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC1A6452B83C01000B75E3C /* DemoViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +28,8 @@
 		DBA0E6B82B8377EB003CF733 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DBA0E6BB2B8377EB003CF733 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		DBA0E6BD2B8377EB003CF733 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DBC1A6422B83B31D00B75E3C /* StarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarViewController.swift; sourceTree = "<group>"; };
+		DBC1A6452B83C01000B75E3C /* DemoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,7 +83,7 @@
 			isa = PBXGroup;
 			children = (
 				DBA0E6C42B837F1C003CF733 /* App */,
-				DBA0E6B32B8377EA003CF733 /* LauncScreenController.swift */,
+				DBC1A6402B83AE1E00B75E3C /* Scenes */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -101,6 +105,32 @@
 				DBA0E6BD2B8377EB003CF733 /* Info.plist */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		DBC1A6402B83AE1E00B75E3C /* Scenes */ = {
+			isa = PBXGroup;
+			children = (
+				DBC1A6442B83B44500B75E3C /* LaunchScene */,
+				DBC1A6412B83AE3900B75E3C /* StartScene */,
+				DBC1A6452B83C01000B75E3C /* DemoViewController.swift */,
+			);
+			path = Scenes;
+			sourceTree = "<group>";
+		};
+		DBC1A6412B83AE3900B75E3C /* StartScene */ = {
+			isa = PBXGroup;
+			children = (
+				DBC1A6422B83B31D00B75E3C /* StarViewController.swift */,
+			);
+			path = StartScene;
+			sourceTree = "<group>";
+		};
+		DBC1A6442B83B44500B75E3C /* LaunchScene */ = {
+			isa = PBXGroup;
+			children = (
+				DBA0E6B32B8377EA003CF733 /* LauncScreenController.swift */,
+			);
+			path = LaunchScene;
 			sourceTree = "<group>";
 		};
 		EAC39E971F298FBC8A5E60FB /* Pods */ = {
@@ -226,9 +256,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DBC1A6432B83B31D00B75E3C /* StarViewController.swift in Sources */,
 				DBA0E6B42B8377EA003CF733 /* LauncScreenController.swift in Sources */,
 				DBA0E6B02B8377EA003CF733 /* AppDelegate.swift in Sources */,
 				DBA0E6B22B8377EA003CF733 /* SceneDelegate.swift in Sources */,
+				DBC1A6462B83C01000B75E3C /* DemoViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

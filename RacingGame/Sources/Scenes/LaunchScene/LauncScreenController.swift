@@ -55,7 +55,23 @@ final class LauncScreenController: UIViewController {
                        options: .curveLinear) {
             self.launchImageView.alpha = Constants.launchImageAlpha
         } completion: { _ in
-            // переход на стартовый экран
+            self.transitionToStartScreen()
+        }
+    }
+
+    private func animatesTransition() -> CATransition {
+        let transition = CATransition()
+        transition.duration = 0.5
+        transition.type = CATransitionType.push
+        transition.subtype = CATransitionSubtype.fromLeft
+        return transition
+    }
+
+    private func transitionToStartScreen() {
+        if let navigationController {
+            let startController = StarViewController()
+            navigationController.view.layer.add(animatesTransition(), forKey: "transition")
+            navigationController.pushViewController(startController, animated: false)
         }
     }
 
