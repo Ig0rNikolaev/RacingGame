@@ -13,6 +13,13 @@
 		DBA0E6B42B8377EA003CF733 /* LauncScreenController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBA0E6B32B8377EA003CF733 /* LauncScreenController.swift */; };
 		DBA0E6B92B8377EB003CF733 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DBA0E6B82B8377EB003CF733 /* Assets.xcassets */; };
 		DBA0E6BC2B8377EB003CF733 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DBA0E6BA2B8377EB003CF733 /* LaunchScreen.storyboard */; };
+		DBC1A6432B83B31D00B75E3C /* StartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC1A6422B83B31D00B75E3C /* StartViewController.swift */; };
+		DBC1A6462B83C01000B75E3C /* DemoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC1A6452B83C01000B75E3C /* DemoViewController.swift */; };
+		DBC1A6482B83C7C000B75E3C /* StartSceneButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC1A6472B83C7C000B75E3C /* StartSceneButton.swift */; };
+		DBC1A64D2B83E02700B75E3C /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC1A64C2B83E02700B75E3C /* Constant.swift */; };
+		DBC1A6542B83E12C00B75E3C /* Formula1-Wide.otf in Resources */ = {isa = PBXBuildFile; fileRef = DBC1A6512B83E12C00B75E3C /* Formula1-Wide.otf */; };
+		DBC1A6602B83EE4A00B75E3C /* Formula1-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = DBC1A65F2B83EE4900B75E3C /* Formula1-Regular.otf */; };
+		DBC1A6622B83EEE300B75E3C /* Formula1-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = DBC1A6612B83EEE300B75E3C /* Formula1-Bold.otf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +33,13 @@
 		DBA0E6B82B8377EB003CF733 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DBA0E6BB2B8377EB003CF733 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		DBA0E6BD2B8377EB003CF733 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DBC1A6422B83B31D00B75E3C /* StartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartViewController.swift; sourceTree = "<group>"; };
+		DBC1A6452B83C01000B75E3C /* DemoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoViewController.swift; sourceTree = "<group>"; };
+		DBC1A6472B83C7C000B75E3C /* StartSceneButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartSceneButton.swift; sourceTree = "<group>"; };
+		DBC1A64C2B83E02700B75E3C /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
+		DBC1A6512B83E12C00B75E3C /* Formula1-Wide.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Formula1-Wide.otf"; sourceTree = "<group>"; };
+		DBC1A65F2B83EE4900B75E3C /* Formula1-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Formula1-Regular.otf"; sourceTree = "<group>"; };
+		DBC1A6612B83EEE300B75E3C /* Formula1-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Formula1-Bold.otf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,7 +93,9 @@
 			isa = PBXGroup;
 			children = (
 				DBA0E6C42B837F1C003CF733 /* App */,
-				DBA0E6B32B8377EA003CF733 /* LauncScreenController.swift */,
+				DBC1A64B2B83DE4100B75E3C /* Base */,
+				DBC1A6492B83D6FD00B75E3C /* Constants */,
+				DBC1A6402B83AE1E00B75E3C /* Scenes */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -101,6 +117,51 @@
 				DBA0E6BD2B8377EB003CF733 /* Info.plist */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		DBC1A6402B83AE1E00B75E3C /* Scenes */ = {
+			isa = PBXGroup;
+			children = (
+				DBC1A6442B83B44500B75E3C /* LaunchScene */,
+				DBC1A6412B83AE3900B75E3C /* StartScene */,
+			);
+			path = Scenes;
+			sourceTree = "<group>";
+		};
+		DBC1A6412B83AE3900B75E3C /* StartScene */ = {
+			isa = PBXGroup;
+			children = (
+				DBC1A6422B83B31D00B75E3C /* StartViewController.swift */,
+				DBC1A6472B83C7C000B75E3C /* StartSceneButton.swift */,
+			);
+			path = StartScene;
+			sourceTree = "<group>";
+		};
+		DBC1A6442B83B44500B75E3C /* LaunchScene */ = {
+			isa = PBXGroup;
+			children = (
+				DBA0E6B32B8377EA003CF733 /* LauncScreenController.swift */,
+			);
+			path = LaunchScene;
+			sourceTree = "<group>";
+		};
+		DBC1A6492B83D6FD00B75E3C /* Constants */ = {
+			isa = PBXGroup;
+			children = (
+				DBC1A64C2B83E02700B75E3C /* Constant.swift */,
+			);
+			path = Constants;
+			sourceTree = "<group>";
+		};
+		DBC1A64B2B83DE4100B75E3C /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				DBC1A65F2B83EE4900B75E3C /* Formula1-Regular.otf */,
+				DBC1A6512B83E12C00B75E3C /* Formula1-Wide.otf */,
+				DBC1A6612B83EEE300B75E3C /* Formula1-Bold.otf */,
+				DBC1A6452B83C01000B75E3C /* DemoViewController.swift */,
+			);
+			path = Base;
 			sourceTree = "<group>";
 		};
 		EAC39E971F298FBC8A5E60FB /* Pods */ = {
@@ -173,6 +234,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				DBA0E6BC2B8377EB003CF733 /* LaunchScreen.storyboard in Resources */,
+				DBC1A6602B83EE4A00B75E3C /* Formula1-Regular.otf in Resources */,
+				DBC1A6622B83EEE300B75E3C /* Formula1-Bold.otf in Resources */,
+				DBC1A6542B83E12C00B75E3C /* Formula1-Wide.otf in Resources */,
 				DBA0E6B92B8377EB003CF733 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -226,9 +290,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DBC1A64D2B83E02700B75E3C /* Constant.swift in Sources */,
+				DBC1A6432B83B31D00B75E3C /* StartViewController.swift in Sources */,
 				DBA0E6B42B8377EA003CF733 /* LauncScreenController.swift in Sources */,
+				DBC1A6482B83C7C000B75E3C /* StartSceneButton.swift in Sources */,
 				DBA0E6B02B8377EA003CF733 /* AppDelegate.swift in Sources */,
 				DBA0E6B22B8377EA003CF733 /* SceneDelegate.swift in Sources */,
+				DBC1A6462B83C01000B75E3C /* DemoViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
