@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-fileprivate enum Constants {
+fileprivate enum ConstantsLaunc {
     // String
     static let launchImage = "lauching"
     static let transitionKey = "transition"
@@ -30,7 +30,7 @@ final class LauncScreenController: UIViewController {
 
     private lazy var launchImageView: UIImageView = {
         let image = UIImageView()
-        image.image = UIImage(named: Constants.launchImage)
+        image.image = UIImage(named: ConstantsLaunc.launchImage)
         image.contentMode = .scaleAspectFit
         return image
     }()
@@ -52,27 +52,18 @@ final class LauncScreenController: UIViewController {
     //: MARK: - Setups
 
     private func setupAnimation() {
-        UIView.animate(withDuration: Constants.launchImageDuration,
-                       delay: Constants.launchImageDelay,
+        UIView.animate(withDuration: ConstantsLaunc.launchImageDuration,
+                       delay: ConstantsLaunc.launchImageDelay,
                        options: .curveLinear) {
-            self.launchImageView.alpha = Constants.launchImageAlpha
+            self.launchImageView.alpha = ConstantsLaunc.launchImageAlpha
         } completion: { _ in
             self.transitionToStartScreen()
         }
     }
 
-    private func animatesTransition() -> CATransition {
-        let transition = CATransition()
-        transition.duration = Constants.transitionDuration
-        transition.type = CATransitionType.push
-        transition.subtype = CATransitionSubtype.fromLeft
-        return transition
-    }
-
     private func transitionToStartScreen() {
         if let navigationController {
-            let startController = StarViewController()
-            navigationController.view.layer.add(animatesTransition(), forKey: Constants.transitionKey)
+            let startController = StartViewController()
             navigationController.pushViewController(startController, animated: false)
         }
     }
@@ -89,8 +80,8 @@ final class LauncScreenController: UIViewController {
         launchImageView.snp.makeConstraints { make in
             make.centerX.equalTo(view.snp.centerX)
             make.centerY.equalTo(view.snp.centerY)
-            make.width.equalTo(Constants.launchImageWidth)
-            make.height.equalTo(Constants.launchImageHeight)
+            make.width.equalTo(ConstantsLaunc.launchImageWidth)
+            make.height.equalTo(ConstantsLaunc.launchImageHeight)
         }
     }
 }

@@ -7,24 +7,25 @@
 
 import UIKit
 
-fileprivate enum Constants {
+fileprivate enum ConstantsButton {
     // String
     static let startTitle = "Start Game"
     static let settingTitle = "Setting Game"
     static let recordTitle = "Records"
 
-    // Setting
-    static let border: CGFloat = 10
-    static let radius: CGFloat = 70
+    // CGFloat
+    static let border: CGFloat = 3
+    static let radius: CGFloat = 7
+    static let fontSize: CGFloat = 25
 }
 
 final class StartSceneButton: UIButton {
 
-    private var configurationButton: ButtonConfig
+    private var configurationButton: ButtonConfiguration
 
     //MARK: - Initializers
 
-    init(configurationButton: ButtonConfig) {
+    init(configurationButton: ButtonConfiguration) {
         self.configurationButton = configurationButton
         super.init(frame: .zero)
         setupButton()
@@ -38,20 +39,22 @@ final class StartSceneButton: UIButton {
 
     private func setups(title: String) {
         setTitle(title, for: .normal)
-        setTitleColor(UIColor.systemRed, for: .normal)
-        layer.borderColor = UIColor.systemRed.cgColor
-        layer.borderWidth = Constants.border
-        layer.cornerRadius = Constants.radius
+        setTitleColor(UIColor.black, for: .normal)
+        titleLabel?.font = UIFont(name: Constant.Font.formulaRegular, size: ConstantsButton.fontSize)
+        clipsToBounds = true
+        layer.borderColor = UIColor.red.cgColor
+        layer.cornerRadius = ConstantsButton.radius
+        layer.borderWidth = ConstantsButton.border
     }
 
     private func setupButton() {
         switch configurationButton {
         case .start:
-            setups(title: Constants.startTitle)
+            setups(title: ConstantsButton.startTitle)
         case .setting:
-            setups(title: Constants.settingTitle)
+            setups(title: ConstantsButton.settingTitle)
         case .record:
-            setups(title: Constants.recordTitle)
+            setups(title: ConstantsButton.recordTitle)
         }
     }
 }
@@ -60,7 +63,7 @@ final class StartSceneButton: UIButton {
 
 extension StartSceneButton {
 
-    enum ButtonConfig {
+    enum ButtonConfiguration {
         case start
         case setting
         case record
