@@ -8,19 +8,21 @@
 import UIKit
 
 fileprivate enum ConstantsButton {
+    //: MARK: - Constants
+    
     // String
     static let startTitle = "Start Game"
     static let settingTitle = "Setting Game"
     static let recordTitle = "Records"
 
     // CGFloat
-    static let border: CGFloat = 3
+    static let border: CGFloat = 2
     static let radius: CGFloat = 7
-    static let fontSize: CGFloat = 25
 }
 
 final class StartSceneButton: UIButton {
-
+    //: MARK: - Properties
+    
     private var configurationButton: ButtonConfiguration
 
     //MARK: - Initializers
@@ -39,12 +41,12 @@ final class StartSceneButton: UIButton {
 
     private func setups(title: String) {
         setTitle(title, for: .normal)
-        setTitleColor(UIColor.black, for: .normal)
-        titleLabel?.font = UIFont(name: Constant.Font.formulaRegular, size: ConstantsButton.fontSize)
+        setTitleColor(UIColor.systemGray6, for: .normal)
+        titleLabel?.font = UIFont(name: Constant.Font.formulaRegular, size: Constant.Button.buttonFont)
         clipsToBounds = true
-        layer.borderColor = UIColor.red.cgColor
+        backgroundColor = .black
+        alpha = Constant.Button.buttonAlpha
         layer.cornerRadius = ConstantsButton.radius
-        layer.borderWidth = ConstantsButton.border
     }
 
     private func setupButton() {

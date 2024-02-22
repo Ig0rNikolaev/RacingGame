@@ -10,11 +10,20 @@ import Foundation
 final class Constant {
     enum Font {
         static let formulaRegular = "Formula1 Display Regular"
-        static let formulaBold = "Formula1 Display Bold"
-        static let formulaWide = "Formula1 Display Wide"
     }
 
     enum Image {
         static let formulaLogo = "lauching"
+        static let road = "road"
+        static let carOne = "car1"
+        static let carTwo = "car2"
+        static let carThree = "car3"
+        static let carFour = "car4"
+        static let carFive = "car5"
+    }
+
+    enum Button {
+        static let buttonAlpha: CGFloat = 0.7
+        static let buttonFont: CGFloat = 25
     }
 }

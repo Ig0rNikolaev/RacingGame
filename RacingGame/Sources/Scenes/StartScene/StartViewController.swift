@@ -9,6 +9,8 @@ import UIKit
 import SnapKit
 
 fileprivate enum ConstantsStart {
+    //: MARK: - Constants
+    
     //String
     static let startImage = "start"
 
@@ -18,7 +20,7 @@ fileprivate enum ConstantsStart {
     static let stackSpacing: CGFloat = 10
 
     //TimeInterval
-    static let startDuration: TimeInterval = 1.5
+    static let startDuration: TimeInterval = 1.0
     static let startDelay: TimeInterval = 1
 
     //Constraints
@@ -100,7 +102,8 @@ final class StartViewController: UIViewController {
     func navigationScreen(_ sender: UIButton) {
         switch sender {
         case startButton:
-            print("startButton")
+            let gameplayConroller = GameplayViewConroller()
+            navigationFromStart(on: gameplayConroller)
         case settingButton:
             print("settingButton")
         case stackButtons:
@@ -112,10 +115,16 @@ final class StartViewController: UIViewController {
 
     //: MARK: - Setups
 
+    private func navigationFromStart(on viewController: UIViewController) {
+        if let navigationController {
+            navigationController.pushViewController(viewController, animated: false)
+        }
+    }
+
     private func setupBackgroundImage() {
         UIView.animate(withDuration: ConstantsStart.startDuration,
                        delay: ConstantsStart.startDelay,
-                       options: .curveLinear) {
+                       options: .curveEaseIn) {
             self.createsAnimation(from: [self.imageBackground, self.stackButtons, self.formulaLogo])
         }
     }
@@ -126,7 +135,6 @@ final class StartViewController: UIViewController {
 
     private func setupView() {
         view.backgroundColor = .systemGray6
-        navigationController?.isNavigationBarHidden = true
     }
 
     private func setupHierarchy() {
