@@ -9,6 +9,8 @@ import UIKit
 import SnapKit
 
 fileprivate enum ConstantsLaunc {
+    //: MARK: - Constants
+    
     // String
     static let launchImage = "lauching"
     static let transitionKey = "transition"
@@ -25,7 +27,6 @@ fileprivate enum ConstantsLaunc {
 }
 
 final class LauncScreenController: UIViewController {
-
     //: MARK: - UI Elements
 
     private lazy var launchImageView: UIImageView = {
