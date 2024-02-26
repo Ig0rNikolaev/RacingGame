@@ -102,12 +102,13 @@ final class StartViewController: UIViewController {
     func navigationScreen(_ sender: UIButton) {
         switch sender {
         case startButton:
-            let gameplayConroller = GameplayViewConroller()
+            let gameplayConroller = GameplayViewController()
             navigationFromStart(on: gameplayConroller)
         case settingButton:
             print("settingButton")
-        case stackButtons:
-            print("stackButtons")
+        case recordButton:
+            let recordConroller = RecordController()
+            navigationFromStart(on: recordConroller)
         default:
             break
         }

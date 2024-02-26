@@ -1,5 +1,5 @@
 //
-//  GameplayViewConroller.swift
+//  GameplayViewController.swift
 //  RacingGame
 //
 //  Created by Игорь Николаев on 20.02.2024.
@@ -60,7 +60,7 @@ fileprivate enum GameConstants {
     static let roadHeight: CGFloat = 100
 }
 
-final class GameplayViewConroller: UIViewController {
+final class GameplayViewController: UIViewController {
     //: MARK: - Properties
 
     var timerCarPlayer: Timer?

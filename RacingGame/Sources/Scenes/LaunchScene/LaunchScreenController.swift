@@ -1,5 +1,5 @@
 //
-//  LauncScreenController.swift
+//  LaunchScreenController.swift
 //  RacingGame
 //
 //  Created by Игорь Николаев on 19.02.2024.
@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-fileprivate enum ConstantsLaunc {
+fileprivate enum ConstantsLaunch {
     //: MARK: - Constants
     
     // String
@@ -26,12 +26,12 @@ fileprivate enum ConstantsLaunc {
     static let transitionDuration = 0.5
 }
 
-final class LauncScreenController: UIViewController {
+final class LaunchScreenController: UIViewController {
     //: MARK: - UI Elements
 
     private lazy var launchImageView: UIImageView = {
         let image = UIImageView()
-        image.image = UIImage(named: ConstantsLaunc.launchImage)
+        image.image = UIImage(named: ConstantsLaunch.launchImage)
         image.contentMode = .scaleAspectFit
         return image
     }()
@@ -53,10 +53,10 @@ final class LauncScreenController: UIViewController {
     //: MARK: - Setups
 
     private func setupAnimation() {
-        UIView.animate(withDuration: ConstantsLaunc.launchImageDuration,
-                       delay: ConstantsLaunc.launchImageDelay,
+        UIView.animate(withDuration: ConstantsLaunch.launchImageDuration,
+                       delay: ConstantsLaunch.launchImageDelay,
                        options: .curveLinear) {
-            self.launchImageView.alpha = ConstantsLaunc.launchImageAlpha
+            self.launchImageView.alpha = ConstantsLaunch.launchImageAlpha
         } completion: { _ in
             self.transitionToStartScreen()
         }
@@ -81,8 +81,8 @@ final class LauncScreenController: UIViewController {
         launchImageView.snp.makeConstraints { make in
             make.centerX.equalTo(view.snp.centerX)
             make.centerY.equalTo(view.snp.centerY)
-            make.width.equalTo(ConstantsLaunc.launchImageWidth)
-            make.height.equalTo(ConstantsLaunc.launchImageHeight)
+            make.width.equalTo(ConstantsLaunch.launchImageWidth)
+            make.height.equalTo(ConstantsLaunch.launchImageHeight)
         }
     }
 }
