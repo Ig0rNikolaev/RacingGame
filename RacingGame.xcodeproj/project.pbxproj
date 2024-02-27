@@ -207,9 +207,9 @@
 		DBCE8D8A2B8D233400F19D3D /* SettingsScene */ = {
 			isa = PBXGroup;
 			children = (
+				DBCE8D8F2B8E151B00F19D3D /* SettingCell.swift */,
 				DBCE8D8B2B8D238500F19D3D /* SettingController.swift */,
 				DBCE8D8D2B8DF6A500F19D3D /* SettingPresenter.swift */,
-				DBCE8D8F2B8E151B00F19D3D /* SettingCell.swift */,
 			);
 			path = SettingsScene;
 			sourceTree = "<group>";

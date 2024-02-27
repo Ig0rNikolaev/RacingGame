@@ -24,11 +24,25 @@ final class SettingController: UIViewController {
         let image = UIImageView()
         image.image = UIImage(systemName: "photo.circle.fill")
         image.contentMode = .scaleAspectFill
-        image.tintColor = .systemGray3
+        image.clipsToBounds = true
+        image.tintColor = .systemGray4
         image.layer.borderColor = UIColor.systemGray3.cgColor
         image.layer.borderWidth = 1
         image.layer.cornerRadius = 100
         return image
+    }()
+
+    private lazy var profileImageLibrary: UIImagePickerController = {
+        let picker = UIImagePickerController()
+        picker.sourceType = .photoLibrary
+        return picker
+    }()
+
+    private lazy var profileImageCamera: UIImagePickerController = {
+        let picker = UIImagePickerController()
+        picker.sourceType = .camera
+        picker.cameraDevice = .front
+        return picker
     }()
 
     private lazy var profileNameText: UITextField = {
@@ -55,6 +69,7 @@ final class SettingController: UIViewController {
         setupHierarchy()
         setupLayout()
         setupNavigationBar()
+        imagePickerDelegate()
     }
 
     //: MARK: - Actions
@@ -64,20 +79,15 @@ final class SettingController: UIViewController {
         presenter.edit(sender: sender)
     }
 
-    @objc
-    func takePhoto() {
-
-    }
-
     //: MARK: - Setups
 
     private func createCameraMenu() -> UIMenu {
         let barButtonMenu = UIMenu(title: "Add photo", children: [
             UIAction(title: "Take a photo", image: UIImage(systemName: "camera.viewfinder"), handler: { _ in
-
+                self.present(self.profileImageCamera, animated: true)
             }),
             UIAction(title: "Select photo", image: UIImage(systemName: "photo"), handler: { _ in
-
+                self.present(self.profileImageLibrary, animated: true)
             }),
         ])
         return barButtonMenu
@@ -87,6 +97,11 @@ final class SettingController: UIViewController {
         let edit = UIBarButtonItem(title: "Edit", style: .plain, target: self, action: #selector(settingEdit))
         let camera = UIBarButtonItem(systemItem: .camera, menu: createCameraMenu())
         navigationItem.rightBarButtonItems = [edit, camera]
+    }
+
+    private func imagePickerDelegate() {
+        profileImageLibrary.delegate = self
+        profileImageCamera.delegate = self
     }
 
     private func setupView() {
@@ -118,7 +133,7 @@ final class SettingController: UIViewController {
     }
 }
 
-//: MARK: - Extension
+//: MARK: - Extensions
 
 extension SettingController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -152,5 +167,14 @@ extension SettingController: UITableViewDataSource {
 extension SettingController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         100
+    }
+}
+
+extension SettingController: UIImagePickerControllerDelegate & UINavigationControllerDelegate {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
+            profileImage.image = image
+        }
+        dismiss(animated: true)
     }
 }
