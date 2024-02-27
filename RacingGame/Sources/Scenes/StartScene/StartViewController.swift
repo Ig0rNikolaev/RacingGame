@@ -105,7 +105,8 @@ final class StartViewController: UIViewController {
             let gameplayConroller = GameplayViewController()
             navigationFromStart(on: gameplayConroller)
         case settingButton:
-            print("settingButton")
+            let settingController = SettingController()
+            navigationFromStart(on: settingController)
         case recordButton:
             let recordConroller = RecordController()
             navigationFromStart(on: recordConroller)

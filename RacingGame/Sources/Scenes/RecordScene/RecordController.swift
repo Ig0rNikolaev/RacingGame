@@ -18,7 +18,7 @@ fileprivate enum ConstantsRecord {
     static let leftOffset = 20
 }
 
-class RecordController: UIViewController {
+final class RecordController: UIViewController {
     //: MARK: - UI Elements
 
     private lazy var recordLabel: UILabel = {
@@ -31,6 +31,7 @@ class RecordController: UIViewController {
     private lazy var recordsTabel: UITableView = {
         let tabel = UITableView(frame: .zero, style: .insetGrouped)
         tabel.register(RecordCell.self, forCellReuseIdentifier: RecordCell.identifier)
+        tabel.separatorColor = .systemGray6
         tabel.dataSource = self
         return tabel
     }()

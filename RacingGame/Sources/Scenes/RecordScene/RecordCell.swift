@@ -20,7 +20,7 @@ fileprivate enum ConstantsRecordCell {
     static let leftOffset = 20
 }
 
-class RecordCell: UITableViewCell {
+final class RecordCell: UITableViewCell {
 
     //: MARK: - Propertys
 
@@ -30,6 +30,7 @@ class RecordCell: UITableViewCell {
 
     private lazy var recordLabel: UILabel = {
         let label = UILabel()
+        label.textColor = .systemGray6
         label.font = UIFont(name: Constant.Font.formulaRegular, size: ConstantsRecordCell.fontSize)
         return label
     }()
@@ -40,6 +41,7 @@ class RecordCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupHierarchy()
         setupLayout()
+        setupView()
     }
 
     required init?(coder: NSCoder) {
@@ -47,6 +49,11 @@ class RecordCell: UITableViewCell {
     }
 
     //: MARK: - Setups
+
+    private func setupView() {
+        contentView.backgroundColor = .black
+        contentView.alpha = Constant.Button.buttonAlpha
+    }
 
     private func setupHierarchy() {
         contentView.addSubview(recordLabel)

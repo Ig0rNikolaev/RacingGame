@@ -23,6 +23,9 @@
 		DBC1A66C2B84CBA000B75E3C /* GameSceneButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC1A66B2B84CBA000B75E3C /* GameSceneButton.swift */; };
 		DBCE8D872B8D133600F19D3D /* RecordController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCE8D862B8D133600F19D3D /* RecordController.swift */; };
 		DBCE8D892B8D15A800F19D3D /* RecordCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCE8D882B8D15A800F19D3D /* RecordCell.swift */; };
+		DBCE8D8C2B8D238500F19D3D /* SettingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCE8D8B2B8D238500F19D3D /* SettingController.swift */; };
+		DBCE8D8E2B8DF6A500F19D3D /* SettingPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCE8D8D2B8DF6A500F19D3D /* SettingPresenter.swift */; };
+		DBCE8D902B8E151B00F19D3D /* SettingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCE8D8F2B8E151B00F19D3D /* SettingCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,6 +49,9 @@
 		DBC1A66B2B84CBA000B75E3C /* GameSceneButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameSceneButton.swift; sourceTree = "<group>"; };
 		DBCE8D862B8D133600F19D3D /* RecordController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordController.swift; sourceTree = "<group>"; };
 		DBCE8D882B8D15A800F19D3D /* RecordCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordCell.swift; sourceTree = "<group>"; };
+		DBCE8D8B2B8D238500F19D3D /* SettingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingController.swift; sourceTree = "<group>"; };
+		DBCE8D8D2B8DF6A500F19D3D /* SettingPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingPresenter.swift; sourceTree = "<group>"; };
+		DBCE8D8F2B8E151B00F19D3D /* SettingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -129,6 +135,7 @@
 		DBC1A6402B83AE1E00B75E3C /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				DBCE8D8A2B8D233400F19D3D /* SettingsScene */,
 				DBCE8D852B8D131300F19D3D /* RecordScene */,
 				DBC1A6652B84BFE000B75E3C /* GameplayScene */,
 				DBC1A6442B83B44500B75E3C /* LaunchScene */,
@@ -195,6 +202,16 @@
 				DBCE8D862B8D133600F19D3D /* RecordController.swift */,
 			);
 			path = RecordScene;
+			sourceTree = "<group>";
+		};
+		DBCE8D8A2B8D233400F19D3D /* SettingsScene */ = {
+			isa = PBXGroup;
+			children = (
+				DBCE8D8B2B8D238500F19D3D /* SettingController.swift */,
+				DBCE8D8D2B8DF6A500F19D3D /* SettingPresenter.swift */,
+				DBCE8D8F2B8E151B00F19D3D /* SettingCell.swift */,
+			);
+			path = SettingsScene;
 			sourceTree = "<group>";
 		};
 		EAC39E971F298FBC8A5E60FB /* Pods */ = {
@@ -328,10 +345,13 @@
 				DBC1A6482B83C7C000B75E3C /* StartSceneButton.swift in Sources */,
 				DBC1A66C2B84CBA000B75E3C /* GameSceneButton.swift in Sources */,
 				DBA0E6B02B8377EA003CF733 /* AppDelegate.swift in Sources */,
+				DBCE8D8E2B8DF6A500F19D3D /* SettingPresenter.swift in Sources */,
+				DBCE8D902B8E151B00F19D3D /* SettingCell.swift in Sources */,
 				DBCE8D872B8D133600F19D3D /* RecordController.swift in Sources */,
 				DBA0E6B22B8377EA003CF733 /* SceneDelegate.swift in Sources */,
 				DBC1A6462B83C01000B75E3C /* DemoViewController.swift in Sources */,
 				DBCE8D892B8D15A800F19D3D /* RecordCell.swift in Sources */,
+				DBCE8D8C2B8D238500F19D3D /* SettingController.swift in Sources */,
 				DBC1A66A2B84C4D300B75E3C /* Extension+UIView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
