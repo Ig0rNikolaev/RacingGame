@@ -30,8 +30,7 @@ fileprivate enum ConstantsStart {
     static let logoWidthOffset = 50
     static let logoHeightOffset = 50
     static let stackTopOffset = 50
-    static let stackRightOffset = -20
-    static let stackLeftOffset = 20
+    static let stackInset = 20
 }
 
 final class StartViewController: UIViewController {
@@ -105,8 +104,8 @@ final class StartViewController: UIViewController {
             let gameplayConroller = GameplayViewController()
             navigationFromStart(on: gameplayConroller)
         case settingButton:
-            let settingController = SettingController()
-            navigationFromStart(on: settingController)
+            let settingController = SettingAssembly()
+            navigationFromStart(on: settingController.builder())
         case recordButton:
             let recordConroller = RecordController()
             navigationFromStart(on: recordConroller)
@@ -140,9 +139,7 @@ final class StartViewController: UIViewController {
     }
 
     private func setupHierarchy() {
-        view.addSubview(imageBackground)
-        view.addSubview(formulaLogo)
-        view.addSubview(stackButtons)
+        view.addViews([imageBackground, formulaLogo, stackButtons])
     }
 
     private func setupLayout() {
@@ -155,8 +152,7 @@ final class StartViewController: UIViewController {
 
         stackButtons.snp.makeConstraints { make in
             make.top.equalTo(formulaLogo.snp.bottom).offset(ConstantsStart.stackTopOffset)
-            make.right.equalTo(ConstantsStart.stackRightOffset)
-            make.left.equalTo(ConstantsStart.stackLeftOffset)
+            make.right.left.equalToSuperview().inset(ConstantsStart.stackInset)
             make.bottom.equalTo(view.snp.centerY)
         }
 
