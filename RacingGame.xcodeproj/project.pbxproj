@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		4C4BECF9EC1FE10CD28BC8A5 /* Pods_RacingGame.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3FC113ACBCD3F0767BA2420E /* Pods_RacingGame.framework */; };
+		DB0A16972B98E32100562364 /* SettingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB0A16962B98E32100562364 /* SettingService.swift */; };
+		DB320F5E2B98AD5400FF7237 /* LocalStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB320F5D2B98AD5400FF7237 /* LocalStorage.swift */; };
 		DB5554232B8FA0080017DA7F /* SettingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB5554222B8FA0080017DA7F /* SettingModel.swift */; };
 		DB5554252B8FAA790017DA7F /* SettingAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB5554242B8FAA790017DA7F /* SettingAssembly.swift */; };
 		DBA0E6B02B8377EA003CF733 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBA0E6AF2B8377EA003CF733 /* AppDelegate.swift */; };
@@ -34,6 +36,8 @@
 		0049525BA2BC5B136DFB45AB /* Pods-RacingGame.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RacingGame.release.xcconfig"; path = "Target Support Files/Pods-RacingGame/Pods-RacingGame.release.xcconfig"; sourceTree = "<group>"; };
 		3FC113ACBCD3F0767BA2420E /* Pods_RacingGame.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RacingGame.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		67A375B4637D174F06052B33 /* Pods-RacingGame.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RacingGame.debug.xcconfig"; path = "Target Support Files/Pods-RacingGame/Pods-RacingGame.debug.xcconfig"; sourceTree = "<group>"; };
+		DB0A16962B98E32100562364 /* SettingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingService.swift; sourceTree = "<group>"; };
+		DB320F5D2B98AD5400FF7237 /* LocalStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalStorage.swift; sourceTree = "<group>"; };
 		DB5554222B8FA0080017DA7F /* SettingModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingModel.swift; sourceTree = "<group>"; };
 		DB5554242B8FAA790017DA7F /* SettingAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingAssembly.swift; sourceTree = "<group>"; };
 		DBA0E6AC2B8377EA003CF733 /* RacingGame.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RacingGame.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -78,6 +82,15 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		DB320F5C2B98ACFF00FF7237 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				DB320F5D2B98AD5400FF7237 /* LocalStorage.swift */,
+				DB0A16962B98E32100562364 /* SettingService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
 		DB4E67592B97B7CD0050492B /* Cell */ = {
 			isa = PBXGroup;
 			children = (
@@ -120,6 +133,7 @@
 				DBC1A64B2B83DE4100B75E3C /* Base */,
 				DBC1A6682B84C49200B75E3C /* Extensions */,
 				DBC1A6492B83D6FD00B75E3C /* Constants */,
+				DB320F5C2B98ACFF00FF7237 /* Services */,
 				DBC1A6402B83AE1E00B75E3C /* Scenes */,
 			);
 			path = Sources;
@@ -361,6 +375,8 @@
 				DBC1A66C2B84CBA000B75E3C /* GameSceneButton.swift in Sources */,
 				DBA0E6B02B8377EA003CF733 /* AppDelegate.swift in Sources */,
 				DBCE8D8E2B8DF6A500F19D3D /* SettingPresenter.swift in Sources */,
+				DB320F5E2B98AD5400FF7237 /* LocalStorage.swift in Sources */,
+				DB0A16972B98E32100562364 /* SettingService.swift in Sources */,
 				DBCE8D902B8E151B00F19D3D /* SettingCell.swift in Sources */,
 				DBCE8D872B8D133600F19D3D /* RecordController.swift in Sources */,
 				DBA0E6B22B8377EA003CF733 /* SceneDelegate.swift in Sources */,

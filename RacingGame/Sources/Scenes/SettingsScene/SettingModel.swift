@@ -7,30 +7,18 @@
 
 import Foundation
 
-protocol ISettingModel: AnyObject {
-    var settings: [Setting] { get set }
+protocol IModelSetting {
+    func createSettingModel() -> [Setting]
 }
 
-enum SectionSetting: Int {
-    case obstacle
-    case car
-}
+final class ModelSetting: IModelSetting {
+  private var settingService: ISettingService
 
-struct Setting {
-    var section: SectionSetting
-    var array: [String]
-}
+    init(settingService: ISettingService) {
+        self.settingService = settingService
+    }
 
-final class SettingModel: ISettingModel {
-    var settings: [Setting] = [Setting(section: .car, 
-                                       array: [Constant.Image.carOne,
-                                               Constant.Image.carTwo,
-                                               Constant.Image.carThree,
-                                               Constant.Image.carFour,
-                                               Constant.Image.carFive]),
-                               Setting(section: .obstacle,
-                                       array: [Constant.Image.carOne,
-                                               Constant.Image.carTwo,
-                                               Constant.Image.carThree])
-    ]
+    func createSettingModel() -> [Setting] {
+        settingService.createSettingServiceModel()
+    }
 }

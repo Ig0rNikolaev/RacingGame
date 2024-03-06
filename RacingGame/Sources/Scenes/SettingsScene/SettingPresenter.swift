@@ -21,25 +21,24 @@ fileprivate enum ConstantsSettingPresenter {
 
 protocol ISettingPresenter {
     func edit(sender: UIBarButtonItem)
-    func createSections(_ indexPath: IndexPath) -> SectionSetting
-    func createModel(_ indexPath: IndexPath) -> String?
+    func createModel() -> [Setting]
     func changeLeft()
-    func changeRight(_ indexPath: IndexPath)
-    func updateImageCell(_ imageCell: UIImageView, _ indexPath: IndexPath)
+    func changeRight(_ index: Int)
+    func updateImageCell(_ imageCell: UIImageView, _ index: Int)
 }
 
 final class SettingPresenter: ISettingPresenter {
     private var isEdit = false
     private var current = ConstantsSettingPresenter.currentZero
-    var model: ISettingModel
+    var model: IModelSetting
     weak var view: ISettingView?
 
-    init(model: ISettingModel) {
+    init(model: IModelSetting) {
         self.model = model
     }
 
-    func createSections(_ indexPath: IndexPath) -> SectionSetting {
-        model.settings[indexPath.section].section
+    func createModel() -> [Setting] {
+        model.createSettingModel()
     }
 
     func edit(sender: UIBarButtonItem) {
@@ -52,23 +51,19 @@ final class SettingPresenter: ISettingPresenter {
         view?.userInteractionEnabled(isEdit)
     }
 
-    func createModel(_ indexPath: IndexPath) -> String? {
-        model.settings[indexPath.section].array[indexPath.row]
-    }
-
     func changeLeft() {
         if current > ConstantsSettingPresenter.currentZero {
             current -= ConstantsSettingPresenter.currentStep
         }
     }
 
-    func changeRight(_ indexPath: IndexPath) {
-        if current < model.settings[indexPath.section].array.count - ConstantsSettingPresenter.currentStep {
+    func changeRight(_ index: Int) {
+        if current < model.createSettingModel()[index].array.count - ConstantsSettingPresenter.currentStep {
             current += ConstantsSettingPresenter.currentStep
         }
     }
 
-    func updateImageCell(_ imageCell: UIImageView, _ indexPath: IndexPath) {
-        imageCell.image = UIImage(named: model.settings[indexPath.section].array[current])
+    func updateImageCell(_ imageCell: UIImageView, _ index: Int) {
+        imageCell.image = UIImage(named: model.createSettingModel()[index].array[current])
     }
 }

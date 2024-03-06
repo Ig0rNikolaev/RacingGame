@@ -14,6 +14,7 @@ final class Constant {
 
     enum Default {
         static let defaultString = ""
+        static let defaultInt = 0
     }
 
     enum Image {
