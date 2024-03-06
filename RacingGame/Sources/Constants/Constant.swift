@@ -12,6 +12,10 @@ final class Constant {
         static let formulaRegular = "Formula1 Display Regular"
     }
 
+    enum Default {
+        static let defaultString = ""
+    }
+
     enum Image {
         static let formulaLogo = "lauching"
         static let road = "road"
