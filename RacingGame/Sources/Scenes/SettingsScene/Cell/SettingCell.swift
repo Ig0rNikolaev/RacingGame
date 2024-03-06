@@ -10,9 +10,6 @@ import SnapKit
 
 fileprivate enum ConstantsSettingCell {
     //: MARK: - Constants
-    //String
-    static let identifier = "SettingCell"
-
     //CGFloat
     static let cellBorderWidth: CGFloat = 1
     static let stackSpacing: CGFloat = 10
@@ -28,10 +25,10 @@ final class SettingCell: UITableViewCell {
 
     //: MARK: - Propertys
 
-    static let identifier = ConstantsSettingCell.identifier
+    static var identifier: String { "\(Self.self)" }
     var indexPath: IndexPath?
     var presenterCell: ISettingPresenter?
-
+    
     //: MARK: - UI Elements
 
     private lazy var labelCell: UILabel = {
@@ -89,11 +86,11 @@ final class SettingCell: UITableViewCell {
         case buttonLeft:
             presenterCell?.changeLeft()
         case buttonRight:
-            presenterCell?.changeRight(indexPath ?? IndexPath())
+            presenterCell?.changeRight(indexPath?.section ?? Constant.Default.defaultInt)
         default:
             break
         }
-        presenterCell?.updateImageCell(imageCell, indexPath ?? IndexPath())
+        presenterCell?.updateImageCell(imageCell, indexPath?.section ?? Constant.Default.defaultInt)
     }
 
     //: MARK: - Setups

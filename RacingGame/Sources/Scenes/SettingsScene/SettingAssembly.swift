@@ -9,7 +9,8 @@ import UIKit
 
 class SettingAssembly {
     func builder() -> UIViewController {
-        let model = SettingModel()
+        let settingService = SettingService()
+        let model = ModelSetting(settingService: settingService)
         let settingPresenter = SettingPresenter(model: model)
         let settingController = SettingView(presenter: settingPresenter)
         settingPresenter.view = settingController

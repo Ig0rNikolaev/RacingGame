@@ -235,12 +235,12 @@ extension SettingView: UITableViewDataSource {
                                                        for: indexPath) as? SettingCell else { return UITableViewCell() }
         cell.presenterCell = presenter
         cell.indexPath = indexPath
-        switch presenter.createSections(indexPath) {
+        switch presenter.createModel()[indexPath.section].section {
         case .car:
-            cell.createSettingCell(ConstantsSetting.sectionCar, presenter.createModel(indexPath) ?? Constant.Default.defaultString)
+            cell.createSettingCell(ConstantsSetting.sectionCar, presenter.createModel()[indexPath.section].array[indexPath.row])
             return cell
         case .obstacle:
-            cell.createSettingCell(ConstantsSetting.sectionObstacle, presenter.createModel(indexPath) ?? Constant.Default.defaultString)
+            cell.createSettingCell(ConstantsSetting.sectionObstacle, presenter.createModel()[indexPath.section].array[indexPath.row])
             return cell
         }
     }

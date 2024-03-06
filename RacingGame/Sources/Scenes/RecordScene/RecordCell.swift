@@ -10,9 +10,6 @@ import SnapKit
 
 fileprivate enum ConstantsRecordCell {
     //: MARK: - Constants
-    //String
-    static let identifier = "RecordCell"
-
     //CGFloat
     static let fontSize: CGFloat = 15
 
@@ -24,7 +21,7 @@ final class RecordCell: UITableViewCell {
 
     //: MARK: - Propertys
 
-    static let identifier = ConstantsRecordCell.identifier
+    static var identifier: String { "\(Self.self)" }
 
     //: MARK: - UI Elements
 
