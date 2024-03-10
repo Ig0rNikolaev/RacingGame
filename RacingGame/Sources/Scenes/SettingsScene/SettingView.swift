@@ -114,17 +114,27 @@ final class SettingView: UIViewController {
         return control
     }()
 
-    private lazy var settingsTabel: UITableView = {
-        let tabel = UITableView(frame: .zero, style: .insetGrouped)
-        tabel.register(SettingCell.self, forCellReuseIdentifier: SettingCell.identifier)
-        tabel.dataSource = self
-        tabel.delegate = self
-        tabel.isUserInteractionEnabled = false
-        return tabel
+    private lazy var stackSetting: UIStackView = {
+        let stack = UIStackView(arrangedSubviews: [profileImage, profileNameText, difficultyLevelControl])
+        stack.axis = .vertical
+        stack.spacing = ConstantsSetting.stackSpacing
+        stack.alignment = .fill
+        stack.distribution = .fillEqually
+        return stack
     }()
 
-    private lazy var stackSetting: UIStackView = {
-        let stack = UIStackView(arrangedSubviews: [profileImage, profileNameText, difficultyLevelControl, settingsTabel])
+    private lazy var settinCar: SettingSelectView = {
+        let view = SettingSelectView(.car)
+        return view
+    }()
+
+    private lazy var settinObstacle: SettingSelectView = {
+        let view = SettingSelectView(.obstacle)
+        return view
+    }()
+
+    private lazy var stackSelect: UIStackView = {
+        let stack = UIStackView(arrangedSubviews: [settinCar, settinObstacle])
         stack.axis = .vertical
         stack.spacing = ConstantsSetting.stackSpacing
         stack.alignment = .fill
@@ -238,7 +248,7 @@ final class SettingView: UIViewController {
     }
 
     private func setupHierarchy() {
-        view.addViews([profileImage, stackSetting, settingsTabel])
+        view.addViews([profileImage, stackSetting, stackSelect])
     }
 
     private func setupLayout() {
@@ -254,9 +264,10 @@ final class SettingView: UIViewController {
             make.height.equalTo(ConstantsSetting.stackHeight)
         }
 
-        settingsTabel.snp.makeConstraints { make in
-            make.top.equalTo(difficultyLevelControl.snp.bottom).offset(ConstantsSetting.tabelTop)
-            make.left.right.bottom.equalToSuperview()
+        stackSelect.snp.makeConstraints { make in
+            make.top.equalTo(stackSetting.snp.bottom).offset(25)
+            make.left.right.equalToSuperview().inset(ConstantsSetting.stackInset)
+            make.height.equalTo(220)
         }
     }
 }
@@ -266,40 +277,8 @@ final class SettingView: UIViewController {
 extension SettingView: ISettingView {
     func userInteractionEnabled(_ isBool: Bool) {
         profileNameText.isUserInteractionEnabled = isBool
-        settingsTabel.isUserInteractionEnabled = isBool
         difficultyLevelControl.isUserInteractionEnabled = isBool
         camera.isEnabled = isBool
-    }
-}
-
-extension SettingView: UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        ConstantsSetting.numberOfRowsInSection
-    }
-
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: SettingCell.identifier,
-                                                       for: indexPath) as? SettingCell else { return UITableViewCell() }
-        cell.presenterCell = presenter
-        cell.indexPath = indexPath
-        switch presenter.createModel()[indexPath.section].section {
-        case .car:
-            cell.createSettingCell(ConstantsSetting.sectionCar, presenter.createModel()[indexPath.section].array[indexPath.row])
-            return cell
-        case .obstacle:
-            cell.createSettingCell(ConstantsSetting.sectionObstacle, presenter.createModel()[indexPath.section].array[indexPath.row])
-            return cell
-        }
-    }
-}
-
-extension SettingView: UITableViewDelegate {
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        ConstantsSetting.cellHeight
-    }
-
-    func numberOfSections(in tableView: UITableView) -> Int {
-        ConstantsSetting.numberOfSections
     }
 }
 

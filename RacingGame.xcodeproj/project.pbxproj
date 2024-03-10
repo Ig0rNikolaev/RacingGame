@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		4C4BECF9EC1FE10CD28BC8A5 /* Pods_RacingGame.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3FC113ACBCD3F0767BA2420E /* Pods_RacingGame.framework */; };
-		DB0A16972B98E32100562364 /* SettingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB0A16962B98E32100562364 /* SettingService.swift */; };
 		DB0A169A2B9C650300562364 /* ImageStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB0A16992B9C650300562364 /* ImageStorage.swift */; };
 		DB320F5E2B98AD5400FF7237 /* LocalStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB320F5D2B98AD5400FF7237 /* LocalStorage.swift */; };
 		DB5554232B8FA0080017DA7F /* SettingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB5554222B8FA0080017DA7F /* SettingModel.swift */; };
@@ -18,6 +17,7 @@
 		DBA0E6B42B8377EA003CF733 /* LaunchScreenController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBA0E6B32B8377EA003CF733 /* LaunchScreenController.swift */; };
 		DBA0E6B92B8377EB003CF733 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DBA0E6B82B8377EB003CF733 /* Assets.xcassets */; };
 		DBA0E6BC2B8377EB003CF733 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DBA0E6BA2B8377EB003CF733 /* LaunchScreen.storyboard */; };
+		DBA3650E2B9E0C39004B9AF0 /* SettingSelectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBA3650D2B9E0C39004B9AF0 /* SettingSelectView.swift */; };
 		DBC1A6432B83B31D00B75E3C /* StartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC1A6422B83B31D00B75E3C /* StartViewController.swift */; };
 		DBC1A6462B83C01000B75E3C /* DemoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC1A6452B83C01000B75E3C /* DemoViewController.swift */; };
 		DBC1A6482B83C7C000B75E3C /* StartSceneButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC1A6472B83C7C000B75E3C /* StartSceneButton.swift */; };
@@ -30,14 +30,12 @@
 		DBCE8D892B8D15A800F19D3D /* RecordCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCE8D882B8D15A800F19D3D /* RecordCell.swift */; };
 		DBCE8D8C2B8D238500F19D3D /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCE8D8B2B8D238500F19D3D /* SettingView.swift */; };
 		DBCE8D8E2B8DF6A500F19D3D /* SettingPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCE8D8D2B8DF6A500F19D3D /* SettingPresenter.swift */; };
-		DBCE8D902B8E151B00F19D3D /* SettingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCE8D8F2B8E151B00F19D3D /* SettingCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		0049525BA2BC5B136DFB45AB /* Pods-RacingGame.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RacingGame.release.xcconfig"; path = "Target Support Files/Pods-RacingGame/Pods-RacingGame.release.xcconfig"; sourceTree = "<group>"; };
 		3FC113ACBCD3F0767BA2420E /* Pods_RacingGame.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RacingGame.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		67A375B4637D174F06052B33 /* Pods-RacingGame.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RacingGame.debug.xcconfig"; path = "Target Support Files/Pods-RacingGame/Pods-RacingGame.debug.xcconfig"; sourceTree = "<group>"; };
-		DB0A16962B98E32100562364 /* SettingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingService.swift; sourceTree = "<group>"; };
 		DB0A16992B9C650300562364 /* ImageStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageStorage.swift; sourceTree = "<group>"; };
 		DB320F5D2B98AD5400FF7237 /* LocalStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalStorage.swift; sourceTree = "<group>"; };
 		DB5554222B8FA0080017DA7F /* SettingModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingModel.swift; sourceTree = "<group>"; };
@@ -49,6 +47,7 @@
 		DBA0E6B82B8377EB003CF733 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DBA0E6BB2B8377EB003CF733 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		DBA0E6BD2B8377EB003CF733 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DBA3650D2B9E0C39004B9AF0 /* SettingSelectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingSelectView.swift; sourceTree = "<group>"; };
 		DBC1A6422B83B31D00B75E3C /* StartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartViewController.swift; sourceTree = "<group>"; };
 		DBC1A6452B83C01000B75E3C /* DemoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoViewController.swift; sourceTree = "<group>"; };
 		DBC1A6472B83C7C000B75E3C /* StartSceneButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartSceneButton.swift; sourceTree = "<group>"; };
@@ -61,7 +60,6 @@
 		DBCE8D882B8D15A800F19D3D /* RecordCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordCell.swift; sourceTree = "<group>"; };
 		DBCE8D8B2B8D238500F19D3D /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
 		DBCE8D8D2B8DF6A500F19D3D /* SettingPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingPresenter.swift; sourceTree = "<group>"; };
-		DBCE8D8F2B8E151B00F19D3D /* SettingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,17 +95,8 @@
 			isa = PBXGroup;
 			children = (
 				DB0A16982B9C64DC00562364 /* Storages */,
-				DB0A16962B98E32100562364 /* SettingService.swift */,
 			);
 			path = Services;
-			sourceTree = "<group>";
-		};
-		DB4E67592B97B7CD0050492B /* Cell */ = {
-			isa = PBXGroup;
-			children = (
-				DBCE8D8F2B8E151B00F19D3D /* SettingCell.swift */,
-			);
-			path = Cell;
 			sourceTree = "<group>";
 		};
 		DBA0E6A32B8377EA003CF733 = {
@@ -244,11 +233,11 @@
 		DBCE8D8A2B8D233400F19D3D /* SettingsScene */ = {
 			isa = PBXGroup;
 			children = (
-				DB4E67592B97B7CD0050492B /* Cell */,
 				DB5554222B8FA0080017DA7F /* SettingModel.swift */,
 				DBCE8D8B2B8D238500F19D3D /* SettingView.swift */,
 				DBCE8D8D2B8DF6A500F19D3D /* SettingPresenter.swift */,
 				DB5554242B8FAA790017DA7F /* SettingAssembly.swift */,
+				DBA3650D2B9E0C39004B9AF0 /* SettingSelectView.swift */,
 			);
 			path = SettingsScene;
 			sourceTree = "<group>";
@@ -387,12 +376,11 @@
 				DBA0E6B02B8377EA003CF733 /* AppDelegate.swift in Sources */,
 				DBCE8D8E2B8DF6A500F19D3D /* SettingPresenter.swift in Sources */,
 				DB320F5E2B98AD5400FF7237 /* LocalStorage.swift in Sources */,
-				DB0A16972B98E32100562364 /* SettingService.swift in Sources */,
-				DBCE8D902B8E151B00F19D3D /* SettingCell.swift in Sources */,
 				DBCE8D872B8D133600F19D3D /* RecordController.swift in Sources */,
 				DBA0E6B22B8377EA003CF733 /* SceneDelegate.swift in Sources */,
 				DBC1A6462B83C01000B75E3C /* DemoViewController.swift in Sources */,
 				DB5554232B8FA0080017DA7F /* SettingModel.swift in Sources */,
+				DBA3650E2B9E0C39004B9AF0 /* SettingSelectView.swift in Sources */,
 				DBCE8D892B8D15A800F19D3D /* RecordCell.swift in Sources */,
 				DB0A169A2B9C650300562364 /* ImageStorage.swift in Sources */,
 				DBCE8D8C2B8D238500F19D3D /* SettingView.swift in Sources */,

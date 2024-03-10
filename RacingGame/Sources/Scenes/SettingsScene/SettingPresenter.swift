@@ -20,7 +20,6 @@ fileprivate enum ConstantsSettingPresenter {
 
 protocol ISettingPresenter {
     func edit(sender: UIBarButtonItem)
-    func createModel() -> [Setting]
     func changeLeft()
     func changeRight(_ index: Int)
     func updateImageCell(_ imageCell: UIImageView, _ index: Int)
@@ -29,18 +28,9 @@ protocol ISettingPresenter {
 final class SettingPresenter: ISettingPresenter {
     private var isEdit = false
     private var current = ConstantsSettingPresenter.currentZero
-    var model: IModelSetting
     var user: UserSetting?
     var imageStorage = ImageStorage(fileManager: .default)
     weak var view: ISettingView?
-
-    init(model: IModelSetting) {
-        self.model = model
-    }
-
-    func createModel() -> [Setting] {
-        model.createSettingModel()
-    }
 
     func edit(sender: UIBarButtonItem) {
         if isEdit {
@@ -54,18 +44,14 @@ final class SettingPresenter: ISettingPresenter {
     }
 
     func changeLeft() {
-        if current > ConstantsSettingPresenter.currentZero {
-            current -= ConstantsSettingPresenter.currentStep
-        }
+
     }
 
     func changeRight(_ index: Int) {
-        if current < model.createSettingModel()[index].array.count - ConstantsSettingPresenter.currentStep {
-            current += ConstantsSettingPresenter.currentStep
-        }
+
     }
 
     func updateImageCell(_ imageCell: UIImageView, _ index: Int) {
-        imageCell.image = UIImage(named: model.createSettingModel()[index].array[current])
+        imageCell.image = UIImage(named: "car1")
     }
 }

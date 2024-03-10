@@ -90,14 +90,14 @@ final class GameplayViewController: UIViewController {
         return image
     }()
 
-    private lazy var buttonLeft: UIButton = {
+    private lazy var buttonLeft: GameSceneButton = {
         let button = GameSceneButton(configurationButton: .left)
         button.addTarget(self, action: #selector(buttonsControll), for: .touchDown)
         button.addTarget(self, action: #selector(stopControll), for: .touchUpInside)
         return button
     }()
 
-    private lazy var buttonRight: UIButton = {
+    private lazy var buttonRight: GameSceneButton = {
         let button = GameSceneButton(configurationButton: .right)
         button.addTarget(self, action: #selector(buttonsControll), for: .touchDown)
         button.addTarget(self, action: #selector(stopControll), for: .touchUpInside)

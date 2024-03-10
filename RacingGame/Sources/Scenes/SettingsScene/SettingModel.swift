@@ -19,18 +19,9 @@ struct UserSetting: Codable {
 }
 
 protocol IModelSetting {
-    func createSettingModel() -> [Setting]
+    
 }
 
 final class ModelSetting: IModelSetting {
-    private var settingService: ISettingService
-    private var user = UserSetting()
 
-    init(settingService: ISettingService) {
-        self.settingService = settingService
-    }
-
-    func createSettingModel() -> [Setting] {
-        settingService.createSettingServiceModel()
-    }
 }
