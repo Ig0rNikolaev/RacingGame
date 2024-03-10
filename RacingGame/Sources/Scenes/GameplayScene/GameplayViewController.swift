@@ -111,6 +111,7 @@ final class GameplayViewController: UIViewController {
         setupView()
         setupHierarchy()
         setupLayout()
+        create()
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -153,6 +154,18 @@ final class GameplayViewController: UIViewController {
 
     //: MARK: - Setups
 
+    var road = 3.0
+    var obstacle = 4.0
+
+    func create() {
+        if let data = UserDefaults.standard.data(forKey: "user") {
+            let user = try? JSONDecoder().decode(UserSetting.self, from: data)
+            road = user?.durationRoad ?? 3.0
+            obstacle = user?.durationObstacle ?? 4.0
+        }
+    }
+
+
     private func createsObstacle() {
         timerObstacle = Timer.scheduledTimer(withTimeInterval: GameConstants.obstacleInterval, repeats: true, block: {  _ in
 
@@ -165,7 +178,7 @@ final class GameplayViewController: UIViewController {
                                          width: GameConstants.widthModel,
                                          height: GameConstants.heightModel)
             self.view.insertSubview(imageObstacle, at: GameConstants.obstacleInsert)
-            self.animationBackground(imageObstacle, GameConstants.obstacleDuration, self.scoresCount)
+            self.animationBackground(imageObstacle, self.obstacle, self.scoresCount)
 
             let leftBlock = CGRect(x: GameConstants.blockIntersectX, 
                                    y: GameConstants.blockIntersectY,
@@ -191,7 +204,7 @@ final class GameplayViewController: UIViewController {
 
             let left = self.createsBlock(GameConstants.blockX)
             let _ = self.createsBlock(self.view.bounds.width - left.frame.width)
-            self.animationBackground(imageRoad, GameConstants.roadDuration, nil)
+            self.animationBackground(imageRoad, self.road, nil)
         })
     }
 
@@ -203,7 +216,7 @@ final class GameplayViewController: UIViewController {
         imageBlock.frame = CGRect(x: x, 
                                   y: GameConstants.blockY,
                                   width: GameConstants.blockWidth,
-                                  height: self.view.bounds.height + GameConstants.blockHeight)
+                                  height: 70)
         self.view.insertSubview(imageBlock, at: GameConstants.blockInsert)
         animationBackground(imageBlock, GameConstants.roadDuration, nil)
         return imageBlock

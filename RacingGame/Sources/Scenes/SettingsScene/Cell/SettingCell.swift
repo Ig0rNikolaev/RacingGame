@@ -28,7 +28,7 @@ final class SettingCell: UITableViewCell {
     static var identifier: String { "\(Self.self)" }
     var indexPath: IndexPath?
     var presenterCell: ISettingPresenter?
-    
+
     //: MARK: - UI Elements
 
     private lazy var labelCell: UILabel = {
@@ -49,7 +49,7 @@ final class SettingCell: UITableViewCell {
         return button
     }()
 
-    private lazy var imageCell: UIImageView = {
+    var imageCell: UIImageView = {
         let image = UIImageView()
         image.contentMode = .scaleAspectFit
         image.clipsToBounds = true

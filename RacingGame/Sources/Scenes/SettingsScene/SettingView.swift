@@ -10,8 +10,6 @@ import SnapKit
 
 fileprivate enum ConstantsSetting {
     //: MARK: - Constants
-    static let levelArray = ["Easy", "Medium", "Hard"]
-
     //String
     static let proxyImage = "photo.circle.fill"
     static let placeholderName = "Enter your name"
@@ -23,6 +21,9 @@ fileprivate enum ConstantsSetting {
     static let titleEdit = "Edit"
     static let sectionCar = "Car: "
     static let sectionObstacle = "Obstacle: "
+    static let easy = "Easy"
+    static let medium = "Medium"
+    static let hard = "Hard"
 
     //CGFloat
     static let borderWidthImage: CGFloat = 1
@@ -46,6 +47,7 @@ fileprivate enum ConstantsSetting {
 
 protocol ISettingView: AnyObject {
     func userInteractionEnabled(_ isBool: Bool)
+    func userSave()
 }
 
 final class SettingView: UIViewController {
@@ -53,6 +55,13 @@ final class SettingView: UIViewController {
     //: MARK: - Propertys
 
     var presenter: ISettingPresenter
+    var camera = UIBarButtonItem()
+    var user = UserSetting()
+    let localUser = LocalStorage(userDefaults: .standard)
+    let imageLocal = ImageStorage(fileManager: .default)
+    var durationRoad: Double = 0
+    var durationObstacle: Double = 0
+    var level = 0
 
     //: MARK: - UI Elements
 
@@ -71,6 +80,7 @@ final class SettingView: UIViewController {
     private lazy var profileImageLibrary: UIImagePickerController = {
         let picker = UIImagePickerController()
         picker.sourceType = .photoLibrary
+        picker.delegate = self
         return picker
     }()
 
@@ -78,6 +88,7 @@ final class SettingView: UIViewController {
         let picker = UIImagePickerController()
         picker.sourceType = .camera
         picker.cameraDevice = .front
+        picker.delegate = self
         return picker
     }()
 
@@ -91,12 +102,14 @@ final class SettingView: UIViewController {
     }()
 
     private lazy var difficultyLevelControl: UISegmentedControl = {
-        let control = UISegmentedControl(items: ConstantsSetting.levelArray)
+        let control = UISegmentedControl(items: [ConstantsSetting.easy,
+                                                 ConstantsSetting.medium,
+                                                 ConstantsSetting.hard])
         control.selectedSegmentIndex = ConstantsSetting.segmentIndex
         control.addTarget(self, action: #selector(setsDifficultyLevel), for: .valueChanged)
         control.setTitleTextAttributes([NSAttributedString.Key.font:
-                                            UIFont(name: Constant.Font.formulaRegular, size: ConstantsSetting.fontSize) ?? UIFont()],
-                                       for: .normal)
+                                            UIFont(name: Constant.Font.formulaRegular,
+                                                   size: ConstantsSetting.fontSize) ?? UIFont()], for: .normal)
         control.isUserInteractionEnabled = false
         return control
     }()
@@ -127,7 +140,7 @@ final class SettingView: UIViewController {
         setupHierarchy()
         setupLayout()
         setupNavigationBar()
-        imagePickerDelegate()
+        loadUserProfile()
     }
 
     //: MARK: - Initializers
@@ -152,17 +165,42 @@ final class SettingView: UIViewController {
     private func setsDifficultyLevel(sender: UISegmentedControl) {
         switch sender.selectedSegmentIndex {
         case 0: 
-            print("Zero")
-        case 1: 
-            print("One")
-        case 2: 
-            print("Two")
-        default: 
+            durationRoad = 3.0
+            durationObstacle = 4.0
+            level = 0
+        case 1:
+            durationRoad = 2.0
+            durationObstacle = 3.0
+            level = 1
+        case 2:
+            durationRoad = 1.0
+            durationObstacle = 2.0
+            level = 2
+        default:
             break
         }
+        user.durationObstacle = durationObstacle
+        user.durationRoad = durationRoad
+        user.segmentLevel = level
     }
 
     //: MARK: - Setups
+
+    private func loadUserProfile() {
+        if let data = UserDefaults.standard.data(forKey: "user") {
+            let userData = try? JSONDecoder().decode(UserSetting.self, from: data)
+            let avatar = imageLocal.loadImage(by: userData?.avatar ?? "")
+            profileNameText.text = userData?.name ?? ""
+            profileImage.image = avatar
+            difficultyLevelControl.selectedSegmentIndex = userData?.segmentLevel ?? 0
+        }
+    }
+
+    func userSave() {
+        user.name = profileNameText.text
+        let data = try? JSONEncoder().encode(user)
+        localUser.save(data, for: "user")
+    }
 
     private func createCameraMenu() -> UIMenu {
         let barButtonMenu = UIMenu(title: ConstantsSetting.titleMenu, children: [
@@ -176,15 +214,23 @@ final class SettingView: UIViewController {
         return barButtonMenu
     }
 
-    private func setupNavigationBar() {
-        let edit = UIBarButtonItem(title: ConstantsSetting.titleEdit, style: .plain, target: self, action: #selector(settingEdit))
-        let camera = UIBarButtonItem(systemItem: .camera, menu: createCameraMenu())
-        navigationItem.rightBarButtonItems = [edit, camera]
+    func createCameraMenus(_ isBool: Bool) -> UIMenu {
+        let barButtonMenu = UIMenu(title: ConstantsSetting.titleMenu, children: [
+            UIAction(title: ConstantsSetting.titleActionTake, image: UIImage(systemName: ConstantsSetting.imageActionTake), handler: { _ in
+                self.present(self.profileImageCamera, animated: true)
+            }),
+            UIAction(title: ConstantsSetting.titleActionSelect, image: UIImage(systemName: ConstantsSetting.imageActionSelect), handler: { _ in
+                self.present(self.profileImageLibrary, animated: true)
+            }),
+        ])
+        return barButtonMenu
     }
 
-    private func imagePickerDelegate() {
-        profileImageLibrary.delegate = self
-        profileImageCamera.delegate = self
+    private func setupNavigationBar() {
+        let edit = UIBarButtonItem(title: ConstantsSetting.titleEdit, style: .plain, target: self, action: #selector(settingEdit))
+        camera = UIBarButtonItem(systemItem: .camera, menu: createCameraMenu())
+        camera.isEnabled = false
+        navigationItem.rightBarButtonItems = [edit, camera]
     }
 
     private func setupView() {
@@ -222,6 +268,7 @@ extension SettingView: ISettingView {
         profileNameText.isUserInteractionEnabled = isBool
         settingsTabel.isUserInteractionEnabled = isBool
         difficultyLevelControl.isUserInteractionEnabled = isBool
+        camera.isEnabled = isBool
     }
 }
 
@@ -259,6 +306,8 @@ extension SettingView: UITableViewDelegate {
 extension SettingView: UIImagePickerControllerDelegate & UINavigationControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
+            let imageFile = try? imageLocal.saveImage(image: image)
+            user.avatar = imageFile
             profileImage.image = image
         }
         dismiss(animated: true)

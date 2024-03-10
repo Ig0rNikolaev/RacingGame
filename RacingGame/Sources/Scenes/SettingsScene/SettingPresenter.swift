@@ -9,7 +9,6 @@ import UIKit
 
 fileprivate enum ConstantsSettingPresenter {
     //: MARK: - Constants
-
     //String
     static let editTitle = "Edit"
     static let saveTitle = "Save"
@@ -31,6 +30,8 @@ final class SettingPresenter: ISettingPresenter {
     private var isEdit = false
     private var current = ConstantsSettingPresenter.currentZero
     var model: IModelSetting
+    var user: UserSetting?
+    var imageStorage = ImageStorage(fileManager: .default)
     weak var view: ISettingView?
 
     init(model: IModelSetting) {
@@ -44,6 +45,7 @@ final class SettingPresenter: ISettingPresenter {
     func edit(sender: UIBarButtonItem) {
         if isEdit {
             sender.title = ConstantsSettingPresenter.editTitle
+            view?.userSave()
         } else {
             sender.title = ConstantsSettingPresenter.saveTitle
         }

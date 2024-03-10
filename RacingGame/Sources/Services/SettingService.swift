@@ -16,7 +16,7 @@ enum SectionSetting: Int {
     case car
 }
 
-struct Setting {
+struct Setting: Hashable {
     var section: SectionSetting
     var array: [String]
 }
@@ -25,8 +25,6 @@ final class SettingService: ISettingService {
    private var settings: [Setting] = [Setting(section: .car,
                                        array: [Constant.Image.carOne,
                                                Constant.Image.carTwo,
-                                               Constant.Image.carThree,
-                                               Constant.Image.carFour,
                                                Constant.Image.carFive]),
                                Setting(section: .obstacle,
                                        array: [Constant.Image.carOne,

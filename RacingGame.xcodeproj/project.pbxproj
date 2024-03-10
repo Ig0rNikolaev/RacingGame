@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		4C4BECF9EC1FE10CD28BC8A5 /* Pods_RacingGame.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3FC113ACBCD3F0767BA2420E /* Pods_RacingGame.framework */; };
 		DB0A16972B98E32100562364 /* SettingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB0A16962B98E32100562364 /* SettingService.swift */; };
+		DB0A169A2B9C650300562364 /* ImageStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB0A16992B9C650300562364 /* ImageStorage.swift */; };
 		DB320F5E2B98AD5400FF7237 /* LocalStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB320F5D2B98AD5400FF7237 /* LocalStorage.swift */; };
 		DB5554232B8FA0080017DA7F /* SettingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB5554222B8FA0080017DA7F /* SettingModel.swift */; };
 		DB5554252B8FAA790017DA7F /* SettingAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB5554242B8FAA790017DA7F /* SettingAssembly.swift */; };
@@ -37,6 +38,7 @@
 		3FC113ACBCD3F0767BA2420E /* Pods_RacingGame.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RacingGame.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		67A375B4637D174F06052B33 /* Pods-RacingGame.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RacingGame.debug.xcconfig"; path = "Target Support Files/Pods-RacingGame/Pods-RacingGame.debug.xcconfig"; sourceTree = "<group>"; };
 		DB0A16962B98E32100562364 /* SettingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingService.swift; sourceTree = "<group>"; };
+		DB0A16992B9C650300562364 /* ImageStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageStorage.swift; sourceTree = "<group>"; };
 		DB320F5D2B98AD5400FF7237 /* LocalStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalStorage.swift; sourceTree = "<group>"; };
 		DB5554222B8FA0080017DA7F /* SettingModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingModel.swift; sourceTree = "<group>"; };
 		DB5554242B8FAA790017DA7F /* SettingAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingAssembly.swift; sourceTree = "<group>"; };
@@ -82,10 +84,19 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		DB320F5C2B98ACFF00FF7237 /* Services */ = {
+		DB0A16982B9C64DC00562364 /* Storages */ = {
 			isa = PBXGroup;
 			children = (
 				DB320F5D2B98AD5400FF7237 /* LocalStorage.swift */,
+				DB0A16992B9C650300562364 /* ImageStorage.swift */,
+			);
+			path = Storages;
+			sourceTree = "<group>";
+		};
+		DB320F5C2B98ACFF00FF7237 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				DB0A16982B9C64DC00562364 /* Storages */,
 				DB0A16962B98E32100562364 /* SettingService.swift */,
 			);
 			path = Services;
@@ -383,6 +394,7 @@
 				DBC1A6462B83C01000B75E3C /* DemoViewController.swift in Sources */,
 				DB5554232B8FA0080017DA7F /* SettingModel.swift in Sources */,
 				DBCE8D892B8D15A800F19D3D /* RecordCell.swift in Sources */,
+				DB0A169A2B9C650300562364 /* ImageStorage.swift in Sources */,
 				DBCE8D8C2B8D238500F19D3D /* SettingView.swift in Sources */,
 				DBC1A66A2B84C4D300B75E3C /* Extension+UIView.swift in Sources */,
 			);
