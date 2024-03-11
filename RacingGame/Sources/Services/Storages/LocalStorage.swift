@@ -9,7 +9,7 @@ import Foundation
 
 protocol ILocalStorage {
     func save<T>(_ value: T, for key: String)
-    func fetchValue<T>(type: T.Type, for key: String) -> T?
+    func fetchValue<T: Codable>(type: T.Type, for key: String) -> T?
 }
 
 final class LocalStorage: ILocalStorage {
@@ -23,7 +23,11 @@ final class LocalStorage: ILocalStorage {
         userDefaults.set(value, forKey: key)
     }
 
-    func fetchValue<T>(type: T.Type, for key: String) -> T? {
-        userDefaults.value(forKey: key) as? T
+    func fetchValue<T: Codable>(type: T.Type, for key: String) -> T? {
+        var user: T?
+        if let data = userDefaults.value(forKey: key) as? Data {
+            user = try? JSONDecoder().decode(type, from: data)
+        }
+        return user
     }
 }

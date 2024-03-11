@@ -27,7 +27,7 @@ final class ImageStorage: IImageStorage {
         try data.write(to: url)
         return name
     }
-
+    
     func loadImage(by name: String) -> UIImage? {
         guard let directory = fileManager.urls(for: .documentDirectory, in: .userDomainMask).first else  { return nil }
         let url = directory.appendingPathComponent(name)

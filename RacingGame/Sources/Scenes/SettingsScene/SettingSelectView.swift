@@ -26,7 +26,7 @@ fileprivate enum ConstantsSettingSelect {
     static let stackHeight = 53
 }
 
-final class SettingSelectView: UIView {
+class SettingSelectView: UIView {
     
     //: MARK: - Properties
     
@@ -83,7 +83,24 @@ final class SettingSelectView: UIView {
     }
     
     //: MARK: - Setups
-    
+
+    func createButtonAction(action: Selector, event: UIControl.Event) {
+        buttonLeft.addTarget(nil, action: action, for: event)
+        buttonRight.addTarget(nil, action: action, for: event)
+    }
+
+    func createLeftButton() -> GameSceneButton {
+        buttonLeft
+    }
+
+    func createRightButton() -> GameSceneButton {
+        buttonRight
+    }
+
+    func createImage() -> UIImageView {
+        imageSetting
+    }
+
     private func setupView() {
         backgroundColor = .white
         layer.borderWidth = ConstantsSettingSelect.cellBorderWidth
