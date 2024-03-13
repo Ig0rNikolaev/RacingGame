@@ -22,8 +22,12 @@ final class ImageStorage: IImageStorage {
     func saveImage(image: UIImage) throws -> String? {
         guard let directory = fileManager.urls(for: .documentDirectory, in: .userDomainMask).first,
               let data = image.jpegData(compressionQuality: 1.0) else { return nil }
-        let name = UUID().uuidString
+        let name = "avatar"
         let url = directory.appendingPathComponent(name)
+
+        if fileManager.fileExists(atPath: url.path) {
+           try fileManager.removeItem(atPath: url.path)
+        }
         try data.write(to: url)
         return name
     }

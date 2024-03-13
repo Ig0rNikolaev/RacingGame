@@ -9,22 +9,26 @@ import UIKit
 import SnapKit
 
 fileprivate enum ConstantsRecord {
-    //: MARK: - Constants
-    //String
     static let title = "Records"
-
-    //Constraints
     static let topOffset = 5
     static let leftOffset = 20
 }
 
+protocol IRecordView: AnyObject {
+    func updateRecordTabel()
+}
+
 final class RecordController: UIViewController {
+    //: MARK: - Properties
+
+    let presenter: IRecordPresenter
+
     //: MARK: - UI Elements
 
     private lazy var recordLabel: UILabel = {
         let label = UILabel()
         label.text = ConstantsRecord.title
-        label.font = UIFont(name: Constant.Font.formulaRegular, size: Constant.Button.buttonFont)
+        label.font = UIFont(name: Constant.Font.formulaRegular, size: Constant.Font.largeFont)
         return label
     }()
 
@@ -43,9 +47,25 @@ final class RecordController: UIViewController {
         setupView()
         setupHierarchy()
         setupLayout()
+        updateRecords()
+    }
+
+    //: MARK: - Initializers
+
+    init(presenter: IRecordPresenter) {
+        self.presenter = presenter
+        super.init(nibName: nil, bundle: nil)
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError()
     }
 
     //: MARK: - Setups
+
+    private func updateRecords() {
+        presenter.updateRecords()
+    }
 
     private func setupView() {
         view.backgroundColor = .systemGray6
@@ -68,15 +88,23 @@ final class RecordController: UIViewController {
     }
 }
 
+//: MARK: - Extension
+
 extension RecordController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        10
+        presenter.arrayRecords().count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: RecordCell.identifier,
                                                        for: indexPath) as? RecordCell else { return UITableViewCell() }
-        cell.createRecordCell(ConstantsRecord.title)
+        cell.createRecordCell("\(presenter.arrayRecords()[indexPath.row])")
         return cell
+    }
+}
+
+extension RecordController: IRecordView {
+    func updateRecordTabel() {
+        recordsTabel.reloadData()
     }
 }

@@ -8,22 +8,22 @@
 import UIKit
 import SnapKit
 
-fileprivate enum ConstantsLaunch {
-    //: MARK: - Constants
-    
-    // String
+extension String {
     static let launchImage = "lauching"
-    static let transitionKey = "transition"
+}
 
-    // Layouts
-    static let launchImageWidth = 300
-    static let launchImageHeight = 150
-
-    // Animations
+extension Double {
     static let launchImageDuration = 1.0
     static let launchImageDelay = 0.0
+}
+
+extension CGFloat {
     static let launchImageAlpha = 0.0
-    static let transitionDuration = 0.5
+}
+
+fileprivate enum ConstantsLaunch {
+    static let launchImageWidth = 300
+    static let launchImageHeight = 150
 }
 
 final class LaunchScreenController: UIViewController {
@@ -31,7 +31,7 @@ final class LaunchScreenController: UIViewController {
 
     private lazy var launchImageView: UIImageView = {
         let image = UIImageView()
-        image.image = UIImage(named: ConstantsLaunch.launchImage)
+        image.image = UIImage(named: .launchImage)
         image.contentMode = .scaleAspectFit
         return image
     }()
@@ -53,10 +53,10 @@ final class LaunchScreenController: UIViewController {
     //: MARK: - Setups
 
     private func setupAnimation() {
-        UIView.animate(withDuration: ConstantsLaunch.launchImageDuration,
-                       delay: ConstantsLaunch.launchImageDelay,
+        UIView.animate(withDuration: .launchImageDuration,
+                       delay: .launchImageDelay,
                        options: .curveLinear) {
-            self.launchImageView.alpha = ConstantsLaunch.launchImageAlpha
+            self.launchImageView.alpha = .launchImageAlpha
         } completion: { _ in
             self.transitionToStartScreen()
         }

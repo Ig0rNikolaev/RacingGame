@@ -8,50 +8,58 @@
 import UIKit
 import SnapKit
 
-fileprivate enum ConstantsSetting {
-    //: MARK: - Constants
-    //String
-    static let proxyImage = "photo.circle.fill"
-    static let placeholderName = "Enter your name"
-    static let titleMenu = "Add photo"
-    static let titleActionTake = "Take a photo"
-    static let titleActionSelect = "Select photo"
-    static let imageActionTake = "camera.viewfinder"
-    static let imageActionSelect = "photo"
-    static let titleEdit = "Edit"
-    static let easy = "Easy"
-    static let medium = "Medium"
-    static let hard = "Hard"
-
-    //CGFloat
-    static let borderWidthImage: CGFloat = 1
-    static let radiusImage: CGFloat = 100
-    static let fontSize: CGFloat = 15
-    static let stackSpacing: CGFloat = 25
-
-    //Int
+private extension Int {
     static let segmentIndex = 0
+    static let currentCarDefault = 0
+    static let currentObstacleDefault = 0
+}
 
-    //Constraints
-    static let profileImageSize = 200
+private extension CGFloat {
+    static let radiusImage: CGFloat = 100
+    static let stackSpacing: CGFloat = 25
+}
+
+private extension String {
+    static let userNameDefault = ""
+    static let easy = "Easy"
+    static let hard = "Hard"
+    static let medium = "Medium"
+    static let titleEdit = "Edit"
+    static let titleMenu = "Add photo"
+    static let imageActionSelect = "photo"
+    static let titleActionTake = "Take a photo"
+    static let proxyImage = "photo.circle.fill"
+    static let titleActionSelect = "Select photo"
+    static let placeholderName = "Enter your name"
+    static let imageActionTake = "camera.viewfinder"
+}
+
+fileprivate enum ConstantsSetting {
     static let stackTop = 25
     static let stackInset = 20
     static let stackHeight = 120
     static let stackSelectHeight = 220
+    static let profileImageSize = 200
 }
 
 protocol ISettingView: AnyObject {
-    func userInteractionEnabled(_ isBool: Bool)
+    func userInteractionEnabled(_ isEnabled: Bool)
+    func loadUserProfile(_ user: UserSetting, _ image: UIImage)
     func updateImageSelect(_ image: String, _ view: SettingSelectView)
-    func updateProfileName() -> (name: String?, avatar: String?)
+    func updateSettings(_ user: inout UserSetting,
+                        _ imageStorage: IImageStorage,
+                        _ records: [Int]?)
 }
 
-final class SettingView: UIViewController {
-
+final class SettingViewController: UIViewController {
     //: MARK: - Propertys
-    
-    private var imageFile: String?
+
     var presenter: ISettingPresenter
+    var setting = Settings(roadDuration: Constant.Duration.roadDurationEasy,
+                           obstacleDuration: Constant.Duration.obstacleDurationEasy,
+                           isEdit: false,
+                           currentCar: .currentCarDefault,
+                           currentObstacle: .currentObstacleDefault)
 
     //: MARK: - UI Elements
 
@@ -59,13 +67,13 @@ final class SettingView: UIViewController {
 
     private lazy var profileImage: UIImageView = {
         let image = UIImageView()
-        image.image = UIImage(systemName: ConstantsSetting.proxyImage)
+        image.image = UIImage(systemName: .proxyImage)
+        image.tintColor = .systemGray4
         image.contentMode = .scaleAspectFill
         image.clipsToBounds = true
-        image.tintColor = .systemGray4
         image.layer.borderColor = UIColor.systemGray3.cgColor
-        image.layer.borderWidth = ConstantsSetting.borderWidthImage
-        image.layer.cornerRadius = ConstantsSetting.radiusImage
+        image.layer.borderWidth = Constant.Default.borderWidth
+        image.layer.cornerRadius = .radiusImage
         return image
     }()
 
@@ -86,28 +94,26 @@ final class SettingView: UIViewController {
 
     private lazy var profileNameText: UITextField = {
         let text = UITextField()
-        text.placeholder = ConstantsSetting.placeholderName
-        text.font = UIFont(name: Constant.Font.formulaRegular, size: ConstantsSetting.fontSize)
+        text.placeholder = .placeholderName
+        text.font = UIFont(name: Constant.Font.formulaRegular, size: Constant.Font.smallFont)
         text.borderStyle = .roundedRect
         return text
     }()
 
     private lazy var difficultyLevelControl: UISegmentedControl = {
-        let control = UISegmentedControl(items: [ConstantsSetting.easy,
-                                                 ConstantsSetting.medium,
-                                                 ConstantsSetting.hard])
-        control.selectedSegmentIndex = ConstantsSetting.segmentIndex
+        let control = UISegmentedControl(items: [String.easy, .medium, .hard])
+        control.selectedSegmentIndex = .segmentIndex
         control.addTarget(self, action: #selector(setsDifficultyLevel), for: .valueChanged)
         control.setTitleTextAttributes([NSAttributedString.Key.font:
                                             UIFont(name: Constant.Font.formulaRegular,
-                                                   size: ConstantsSetting.fontSize) ?? UIFont()], for: .normal)
+                                                   size: Constant.Font.smallFont) ?? UIFont()], for: .normal)
         return control
     }()
 
     private lazy var stackSetting: UIStackView = {
         let stack = UIStackView(arrangedSubviews: [profileImage, profileNameText, difficultyLevelControl])
         stack.axis = .vertical
-        stack.spacing = ConstantsSetting.stackSpacing
+        stack.spacing = .stackSpacing
         stack.alignment = .fill
         stack.distribution = .fillEqually
         stack.isUserInteractionEnabled = false
@@ -129,7 +135,7 @@ final class SettingView: UIViewController {
     private lazy var stackSelect: UIStackView = {
         let stack = UIStackView(arrangedSubviews: [settinCar, settinObstacle])
         stack.axis = .vertical
-        stack.spacing = ConstantsSetting.stackSpacing
+        stack.spacing = .stackSpacing
         stack.alignment = .fill
         stack.distribution = .fillEqually
         stack.isUserInteractionEnabled = false
@@ -162,48 +168,51 @@ final class SettingView: UIViewController {
 
     @objc
     private func selectCar(sender: GameSceneButton) {
-        presenter.selectCar(sender: sender, settinCar)
+        presenter.selectCar(sender: sender, settinCar, setting)
     }
 
     @objc
     private func selectObstacle(sender: GameSceneButton) {
-        presenter.selectObstacle(sender: sender, settinObstacle)
+        presenter.selectObstacle(sender: sender, settinObstacle, setting)
     }
 
     @objc
     private func settingEdit(sender: UIBarButtonItem) {
-        presenter.edit(sender: sender)
+        presenter.edit(sender: sender, setting)
     }
 
     @objc
     private func setsDifficultyLevel(sender: UISegmentedControl) {
-        presenter.selectLevel(sender: sender)
+        presenter.setsDifficultyLevel(sender: sender, setting)
     }
 
     //: MARK: - Setups
 
     private func loadUserProfile() {
-        presenter.loadUserProfile(&profileNameText.text,
-                                  &difficultyLevelControl.selectedSegmentIndex,
-                                  &settinCar.createImage().image,
-                                  &settinObstacle.createImage().image, 
-                                  &profileImage.image)
+        presenter.loadUserProfile()
     }
 
     private func createCameraMenu() -> UIMenu {
-        let barButtonMenu = UIMenu(title: ConstantsSetting.titleMenu, children: [
-            UIAction(title: ConstantsSetting.titleActionTake, image: UIImage(systemName: ConstantsSetting.imageActionTake), handler: { _ in
-                self.present(self.profileImageCamera, animated: true)
+        let barButtonMenu = UIMenu(title: .titleMenu, children: [
+            UIAction(title: .titleActionTake, 
+                     image: UIImage(systemName: .imageActionTake),
+                     handler: { [weak self] _ in
+                self?.present(self?.profileImageCamera ?? UIImagePickerController(), animated: true)
             }),
-            UIAction(title: ConstantsSetting.titleActionSelect, image: UIImage(systemName: ConstantsSetting.imageActionSelect), handler: { _ in
-                self.present(self.profileImageLibrary, animated: true)
+            UIAction(title: .titleActionSelect, 
+                     image: UIImage(systemName: .imageActionSelect),
+                     handler: { [weak self] _ in
+                self?.present(self?.profileImageLibrary ?? UIImagePickerController(), animated: true)
             }),
         ])
         return barButtonMenu
     }
 
     private func setupNavigationBar() {
-        let edit = UIBarButtonItem(title: ConstantsSetting.titleEdit, style: .plain, target: self, action: #selector(settingEdit))
+        let edit = UIBarButtonItem(title: .titleEdit,
+                                   style: .plain,
+                                   target: self,
+                                   action: #selector(settingEdit))
         camera = UIBarButtonItem(systemItem: .camera, menu: createCameraMenu())
         camera.isEnabled = false
         navigationItem.rightBarButtonItems = [edit, camera]
@@ -236,30 +245,59 @@ final class SettingView: UIViewController {
             make.height.equalTo(ConstantsSetting.stackSelectHeight)
         }
     }
+
+    deinit {
+        print("deinit Setting Camera")
+    }
 }
 
 //: MARK: - Extensions
 
-extension SettingView: ISettingView {
-    func userInteractionEnabled(_ isBool: Bool) {
-        camera.isEnabled = isBool
-        stackSetting.isUserInteractionEnabled = isBool
-        stackSelect.isUserInteractionEnabled = isBool
+extension SettingViewController: ISettingView {
+    func userInteractionEnabled(_ isEnabled: Bool) {
+        camera.isEnabled = isEnabled
+        self.navigationItem.hidesBackButton = isEnabled
+        stackSelect.isUserInteractionEnabled = isEnabled
+        stackSetting.isUserInteractionEnabled = isEnabled
+    }
+
+    func updateSettings(_ user: inout UserSetting,
+                        _ imageStorage: IImageStorage,
+                        _ records: [Int]?) {
+        user.name = profileNameText.text
+        user.durationRoad = setting.roadDuration
+        user.carImage = settinCar.baseModel.imageCar
+        user.durationObstacle = setting.obstacleDuration
+        user.obstacleImage = settinObstacle.baseModel.imageObstacle
+        user.segmentLevel = difficultyLevelControl.selectedSegmentIndex
+        user.avatar = try? imageStorage.saveImage(image: profileImage.image ?? UIImage())
+        if let recordUpdate = records {
+            user.records = recordUpdate
+        }
+    }
+
+    func loadUserProfile( _ user: UserSetting, _ image: UIImage) {
+        profileNameText.text = user.name ?? .userNameDefault
+        setting.roadDuration = user.durationRoad ?? Constant.Duration.roadDurationZero
+        setting.obstacleDuration = user.durationObstacle ?? Constant.Duration.obstacleDurationZero
+        settinCar.baseModel.imageCar = user.carImage ?? Constant.Image.carOne
+        settinCar.baseModel.imageObstacle = user.obstacleImage ?? Constant.Image.carTwo
+        difficultyLevelControl.selectedSegmentIndex = user.segmentLevel ?? .segmentIndex
+        settinCar.imageSetting.image = UIImage(named: settinCar.baseModel.imageCar)
+        settinObstacle.imageSetting.image = UIImage(named: settinCar.baseModel.imageObstacle)
+        profileImage.image = image
     }
 
     func updateImageSelect(_ image: String, _ view: SettingSelectView) {
-        view.createImage().image = UIImage(named: image)
-    }
-
-    func updateProfileName() -> (name: String?, avatar: String?) {
-        (profileNameText.text, imageFile)
+        view.imageSetting.image = UIImage(named: image)
+        view.baseModel.imageCar = image
+        view.baseModel.imageObstacle = image
     }
 }
 
-extension SettingView: UIImagePickerControllerDelegate & UINavigationControllerDelegate {
+extension SettingViewController: UIImagePickerControllerDelegate & UINavigationControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
-            presenter.saveImageFile(image, &imageFile)
             profileImage.image = image
         }
         dismiss(animated: true)

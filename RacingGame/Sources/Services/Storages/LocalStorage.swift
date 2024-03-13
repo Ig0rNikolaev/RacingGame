@@ -7,9 +7,13 @@
 
 import Foundation
 
+private extension String {
+    static let key = "user"
+}
+
 protocol ILocalStorage {
-    func save<T>(_ value: T, for key: String)
-    func fetchValue<T: Codable>(type: T.Type, for key: String) -> T?
+    func save<T: Codable>(_ value: T)
+    func fetchValue<T: Codable>(type: T.Type) -> T?
 }
 
 final class LocalStorage: ILocalStorage {
@@ -19,15 +23,14 @@ final class LocalStorage: ILocalStorage {
         self.userDefaults = userDefaults
     }
 
-    func save<T>(_ value: T, for key: String) {
-        userDefaults.set(value, forKey: key)
+    func save<T: Codable>(_ value: T) {
+        let data = try? JSONEncoder().encode(value)
+        userDefaults.set(data, forKey: .key)
     }
 
-    func fetchValue<T: Codable>(type: T.Type, for key: String) -> T? {
-        var user: T?
-        if let data = userDefaults.value(forKey: key) as? Data {
-            user = try? JSONDecoder().decode(type, from: data)
-        }
-        return user
+    func fetchValue<T: Codable>(type: T.Type) -> T? {
+        guard let data = userDefaults.data(forKey: .key) else { return nil }
+        let setting = try? JSONDecoder().decode(type, from: data)
+        return setting
     }
 }

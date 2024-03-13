@@ -7,33 +7,29 @@
 
 import Foundation
 
-struct UserSetting: Codable {
-   var name: String?
-   var avatar: String?
-   var obstacleImage: String?
-   var carImage: String?
-   var durationRoad: Double?
-   var durationObstacle: Double?
-   var segmentLevel: Int?
-   var records: [Int]?
-}
-
 protocol IModelSetting {
     func createCarsModel() -> [String]
     func createObstaclesModel() -> [String]
-    var user: UserSetting { get set }
 }
 
 final class ModelSetting: IModelSetting {
-    private let cars = ["car1", "car2", "car3", "car4", "car5"]
-    private let obstacles = ["car5", "car3", "car1"]
-    var user = UserSetting()
+    //: MARK: - Propertys
+
+    private let carsModels = [Constant.Image.carOne,
+                              Constant.Image.carTwo,
+                              Constant.Image.carThree,
+                              Constant.Image.carFour,
+                              Constant.Image.carFive]
+    private let obstaclesModels = [Constant.Image.carFive,
+                                   Constant.Image.carThree,
+                                   Constant.Image.carOne]
+    //: MARK: - Setups
 
     func createCarsModel() -> [String] {
-        cars
+        carsModels
     }
-    
+
     func createObstaclesModel() -> [String] {
-        obstacles
+        obstaclesModels
     }
 }

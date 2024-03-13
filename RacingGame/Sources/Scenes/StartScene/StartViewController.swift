@@ -8,22 +8,22 @@
 import UIKit
 import SnapKit
 
-fileprivate enum ConstantsStart {
-    //: MARK: - Constants
-    
-    //String
+private extension String {
     static let startImage = "start"
+}
 
-    //CGFloat
+private extension CGFloat {
     static let alphaZero: CGFloat = 0
     static let alphaOne: CGFloat = 1
     static let stackSpacing: CGFloat = 10
+}
 
-    //TimeInterval
+private extension TimeInterval {
     static let startDuration: TimeInterval = 1.0
     static let startDelay: TimeInterval = 1
+}
 
-    //Constraints
+fileprivate enum ConstantsStart {
     static let offset = 0
     static let backgroundTop = 100
     static let logoTopOffset = 100
@@ -34,13 +34,12 @@ fileprivate enum ConstantsStart {
 }
 
 final class StartViewController: UIViewController {
-
     //: MARK: - UI Elements
 
     private lazy var imageBackground: UIImageView = {
         let image = UIImageView()
-        image.image = UIImage(named: ConstantsStart.startImage)
-        image.alpha = ConstantsStart.alphaZero
+        image.image = UIImage(named: .startImage)
+        image.alpha = .alphaZero
         image.contentMode = .scaleAspectFill
         return image
     }()
@@ -48,7 +47,7 @@ final class StartViewController: UIViewController {
     private lazy var formulaLogo: UIImageView = {
         let image = UIImageView()
         image.image = UIImage(named: Constant.Image.formulaLogo)
-        image.alpha = ConstantsStart.alphaZero
+        image.alpha = .alphaZero
         image.contentMode = .scaleAspectFill
         return image
     }()
@@ -74,8 +73,8 @@ final class StartViewController: UIViewController {
     private lazy var stackButtons: UIStackView = {
         let stack = UIStackView(arrangedSubviews: [startButton, settingButton, recordButton])
         stack.axis = .vertical
-        stack.spacing = ConstantsStart.stackSpacing
-        stack.alpha = ConstantsStart.alphaZero
+        stack.spacing = .stackSpacing
+        stack.alpha = .alphaZero
         stack.alignment = .fill
         stack.distribution = .fillEqually
         return stack
@@ -101,14 +100,14 @@ final class StartViewController: UIViewController {
     func navigationScreen(_ sender: UIButton) {
         switch sender {
         case startButton:
-            let gameplayConroller = GameplayViewController()
-            navigationFromStart(on: gameplayConroller)
+            let gameplayConroller = GameplayAssembly()
+            navigationFromStart(on: gameplayConroller.build())
         case settingButton:
             let settingController = SettingAssembly()
             navigationFromStart(on: settingController.builder())
         case recordButton:
-            let recordConroller = RecordController()
-            navigationFromStart(on: recordConroller)
+            let recordConroller = RecordAssembly()
+            navigationFromStart(on: recordConroller.build())
         default:
             break
         }
@@ -123,19 +122,20 @@ final class StartViewController: UIViewController {
     }
 
     private func setupBackgroundImage() {
-        UIView.animate(withDuration: ConstantsStart.startDuration,
-                       delay: ConstantsStart.startDelay,
+        UIView.animate(withDuration: .startDuration,
+                       delay: .startDelay,
                        options: .curveEaseIn) {
             self.createsAnimation(from: [self.imageBackground, self.stackButtons, self.formulaLogo])
         }
     }
 
     private func createsAnimation(from array: [UIView]) {
-        array.forEach { $0.alpha = ConstantsStart.alphaOne }
+        array.forEach { $0.alpha = .alphaOne }
     }
 
     private func setupView() {
         view.backgroundColor = .systemGray6
+        navigationController?.navigationBar.tintColor = .black
     }
 
     private func setupHierarchy() {

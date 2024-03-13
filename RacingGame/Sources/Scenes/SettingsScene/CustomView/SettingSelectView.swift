@@ -8,18 +8,13 @@
 import UIKit
 import SnapKit
 
-fileprivate enum ConstantsSettingSelect {
-    //: MARK: - Constants
-    //String
+private extension String {
     static let carPlaceholder = "Car: "
     static let obstaclePlaceholder = "Obstacle: "
-    
-    //CGFloat
-    static let cellBorderWidth: CGFloat = 1
+}
+
+fileprivate enum ConstantsSettingSelect {
     static let stackSpacing: CGFloat = 10
-    static let radius: CGFloat = 10
-    
-    //Constraints
     static let labelLeftOffset = 10
     static let stackRightOffset = -10
     static let stackWidth = 170
@@ -27,37 +22,38 @@ fileprivate enum ConstantsSettingSelect {
 }
 
 class SettingSelectView: UIView {
-    
     //: MARK: - Properties
-    
+
     private var configuration: SettingConfiguration
-    
+    var baseModel = BaseGameModel(imageCar: Constant.Image.carOne,
+                                  imageObstacle: Constant.Image.carTwo)
+
     //: MARK: - UI Elements
-    
+
     private lazy var settingName: UILabel = {
         let label = UILabel()
         label.font = UIFont(name: Constant.Font.formulaRegular,
-                            size: Constant.Button.buttonFont)
+                            size: Constant.Font.largeFont)
         return label
     }()
-    
+
     private lazy var buttonLeft: GameSceneButton = {
         let button = GameSceneButton(configurationButton: .left)
         return button
     }()
-    
+
     private lazy var buttonRight: GameSceneButton = {
         let button = GameSceneButton(configurationButton: .right)
         return button
     }()
-    
-    private lazy var imageSetting: UIImageView = {
+
+    var imageSetting: UIImageView = {
         let image = UIImageView()
         image.contentMode = .scaleAspectFit
         image.clipsToBounds = true
         return image
     }()
-    
+
     private lazy var changeSettingStack: UIStackView = {
         let stack = UIStackView(arrangedSubviews: [buttonLeft, imageSetting, buttonRight])
         stack.spacing = ConstantsSettingSelect.stackSpacing
@@ -66,10 +62,9 @@ class SettingSelectView: UIView {
         stack.distribution = .fillEqually
         return stack
     }()
-    
-    
+
     //MARK: - Initializers
-    
+
     init(_ configuration: SettingConfiguration) {
         self.configuration = configuration
         super.init(frame: .zero)
@@ -77,11 +72,11 @@ class SettingSelectView: UIView {
         setupHierarchy()
         setupLayout()
     }
-    
+
     required init?(coder: NSCoder) {
         fatalError()
     }
-    
+
     //: MARK: - Setups
 
     func createButtonAction(action: Selector, event: UIControl.Event) {
@@ -97,29 +92,27 @@ class SettingSelectView: UIView {
         buttonRight
     }
 
-    func createImage() -> UIImageView {
-        imageSetting
-    }
-
     private func setupView() {
         backgroundColor = .white
-        layer.borderWidth = ConstantsSettingSelect.cellBorderWidth
-        layer.cornerRadius = ConstantsSettingSelect.radius
+        layer.borderWidth = Constant.Default.borderWidth
+        layer.cornerRadius = Constant.Default.radius
         layer.borderColor = UIColor.systemGray5.cgColor
-        
+
         switch configuration {
         case .car:
-            settingName.text = ConstantsSettingSelect.carPlaceholder
+            settingName.text = .carPlaceholder
+            imageSetting.image = UIImage(named: baseModel.imageCar)
         case .obstacle:
-            settingName.text = ConstantsSettingSelect.obstaclePlaceholder
+            settingName.text = .obstaclePlaceholder
+            imageSetting.image = UIImage(named: baseModel.imageObstacle)
         }
     }
-    
+
     private func setupHierarchy() {
         let views = [settingName, changeSettingStack]
         addViews(views)
     }
-    
+
     private func setupLayout() {
         settingName.snp.makeConstraints { make in
             make.centerY.equalToSuperview()
@@ -131,6 +124,10 @@ class SettingSelectView: UIView {
             make.width.equalTo(ConstantsSettingSelect.stackWidth)
             make.height.equalTo(ConstantsSettingSelect.stackHeight)
         }
+    }
+
+    deinit {
+        print("deinit Select View")
     }
 }
 
