@@ -20,7 +20,7 @@ class DemoViewController: UIViewController {
 
     @objc
     func tap() {
-        navigationController?.pushViewController(StartViewController(), animated: true)
+//        navigationController?.pushViewController(StartViewController(presenter: IStartPresenter), animated: true)
     }
 
     override func viewDidLoad() {
