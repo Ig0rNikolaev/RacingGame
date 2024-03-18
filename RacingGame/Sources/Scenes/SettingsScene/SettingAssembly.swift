@@ -9,10 +9,11 @@ import UIKit
 
 class SettingAssembly {
     func builder() -> UIViewController {
-        let settingService = SettingService()
-        let model = ModelSetting(settingService: settingService)
-        let settingPresenter = SettingPresenter(model: model)
-        let settingController = SettingView(presenter: settingPresenter)
+        let model = ModelSetting()
+        let localStorage = LocalStorage(userDefaults: .standard)
+        let imageStorage = ImageStorage(fileManager: .default)
+        let settingPresenter = SettingPresenter(model: model, localStorage: localStorage, imageStorage: imageStorage)
+        let settingController = SettingViewController(presenter: settingPresenter)
         settingPresenter.view = settingController
         return settingController
     }

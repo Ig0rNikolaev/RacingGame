@@ -39,7 +39,7 @@ final class GameSceneButton: UIButton {
         setBackgroundImage(image, for: .normal)
         tintColor = .black
         contentMode = .scaleAspectFill
-        alpha = Constant.Button.buttonAlpha
+        alpha = Constant.Default.gameAlpha
     }
 
     private func setupButton() {

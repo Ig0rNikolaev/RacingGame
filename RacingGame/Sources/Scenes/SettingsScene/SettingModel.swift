@@ -8,17 +8,28 @@
 import Foundation
 
 protocol IModelSetting {
-    func createSettingModel() -> [Setting]
+    func createCarsModel() -> [String]
+    func createObstaclesModel() -> [String]
 }
 
 final class ModelSetting: IModelSetting {
-  private var settingService: ISettingService
+    //: MARK: - Propertys
 
-    init(settingService: ISettingService) {
-        self.settingService = settingService
+    private let carsModels = [Constant.Image.carOne,
+                              Constant.Image.carTwo,
+                              Constant.Image.carThree,
+                              Constant.Image.carFour,
+                              Constant.Image.carFive]
+    private let obstaclesModels = [Constant.Image.carFive,
+                                   Constant.Image.carThree,
+                                   Constant.Image.carOne]
+    //: MARK: - Setups
+
+    func createCarsModel() -> [String] {
+        carsModels
     }
 
-    func createSettingModel() -> [Setting] {
-        settingService.createSettingServiceModel()
+    func createObstaclesModel() -> [String] {
+        obstaclesModels
     }
 }

@@ -8,27 +8,22 @@
 import UIKit
 import SnapKit
 
-fileprivate enum ConstantsRecordCell {
-    //: MARK: - Constants
-    //CGFloat
-    static let fontSize: CGFloat = 15
-
-    //Constraints
+fileprivate enum ConstantsCell {
     static let leftOffset = 20
+    static let identifier = "\(Self.self)"
 }
 
 final class RecordCell: UITableViewCell {
-
     //: MARK: - Propertys
 
-    static var identifier: String { "\(Self.self)" }
+    static var identifier: String { ConstantsCell.identifier }
 
     //: MARK: - UI Elements
 
     private lazy var recordLabel: UILabel = {
         let label = UILabel()
         label.textColor = .systemGray6
-        label.font = UIFont(name: Constant.Font.formulaRegular, size: ConstantsRecordCell.fontSize)
+        label.font = UIFont(name: Constant.Font.formulaRegular, size: Constant.Font.smallFont)
         return label
     }()
 
@@ -47,9 +42,18 @@ final class RecordCell: UITableViewCell {
 
     //: MARK: - Setups
 
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        recordLabel.text = nil
+    }
+
+    func createRecordCell(_ text: String) {
+        recordLabel.text = text
+    }
+
     private func setupView() {
         contentView.backgroundColor = .black
-        contentView.alpha = Constant.Button.buttonAlpha
+        contentView.alpha = Constant.Default.gameAlpha
     }
 
     private func setupHierarchy() {
@@ -59,16 +63,7 @@ final class RecordCell: UITableViewCell {
     private func setupLayout() {
         recordLabel.snp.makeConstraints { make in
             make.centerY.equalToSuperview()
-            make.left.equalTo(contentView.snp.left).offset(ConstantsRecordCell.leftOffset)
+            make.left.equalTo(contentView.snp.left).offset(ConstantsCell.leftOffset)
         }
-    }
-
-    override func prepareForReuse() {
-        super.prepareForReuse()
-        recordLabel.text = nil
-    }
-
-    func createRecordCell(_ text: String) {
-         recordLabel.text = text
     }
 }
