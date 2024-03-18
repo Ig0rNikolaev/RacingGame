@@ -39,6 +39,8 @@
 		DBF3C6DE2BA7342D00FDCAEE /* GameplayAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBF3C6DD2BA7342D00FDCAEE /* GameplayAssembly.swift */; };
 		DBF3C6E02BA77CE600FDCAEE /* RecordPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBF3C6DF2BA77CE600FDCAEE /* RecordPresenter.swift */; };
 		DBF3C6E22BA77CF500FDCAEE /* RecordAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBF3C6E12BA77CF500FDCAEE /* RecordAssembly.swift */; };
+		DBF3C6EA2BA8669900FDCAEE /* StartPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBF3C6E92BA8669900FDCAEE /* StartPresenter.swift */; };
+		DBF3C6EC2BA866AC00FDCAEE /* StartAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBF3C6EB2BA866AC00FDCAEE /* StartAssembly.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -78,6 +80,8 @@
 		DBF3C6DD2BA7342D00FDCAEE /* GameplayAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameplayAssembly.swift; sourceTree = "<group>"; };
 		DBF3C6DF2BA77CE600FDCAEE /* RecordPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordPresenter.swift; sourceTree = "<group>"; };
 		DBF3C6E12BA77CF500FDCAEE /* RecordAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordAssembly.swift; sourceTree = "<group>"; };
+		DBF3C6E92BA8669900FDCAEE /* StartPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartPresenter.swift; sourceTree = "<group>"; };
+		DBF3C6EB2BA866AC00FDCAEE /* StartAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartAssembly.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -200,8 +204,10 @@
 		DBC1A6412B83AE3900B75E3C /* StartScene */ = {
 			isa = PBXGroup;
 			children = (
+				DBF3C6ED2BA866B400FDCAEE /* CustomViews */,
 				DBC1A6422B83B31D00B75E3C /* StartViewController.swift */,
-				DBC1A6472B83C7C000B75E3C /* StartSceneButton.swift */,
+				DBF3C6E92BA8669900FDCAEE /* StartPresenter.swift */,
+				DBF3C6EB2BA866AC00FDCAEE /* StartAssembly.swift */,
 			);
 			path = StartScene;
 			sourceTree = "<group>";
@@ -299,6 +305,14 @@
 				DBCE8D882B8D15A800F19D3D /* RecordCell.swift */,
 			);
 			path = Cells;
+			sourceTree = "<group>";
+		};
+		DBF3C6ED2BA866B400FDCAEE /* CustomViews */ = {
+			isa = PBXGroup;
+			children = (
+				DBC1A6472B83C7C000B75E3C /* StartSceneButton.swift */,
+			);
+			path = CustomViews;
 			sourceTree = "<group>";
 		};
 		EAC39E971F298FBC8A5E60FB /* Pods */ = {
@@ -427,6 +441,7 @@
 			files = (
 				DBC1A64D2B83E02700B75E3C /* Constant.swift in Sources */,
 				DBC1A6672B84C01600B75E3C /* GameplayViewController.swift in Sources */,
+				DBF3C6EA2BA8669900FDCAEE /* StartPresenter.swift in Sources */,
 				DBF3C6DC2BA733FF00FDCAEE /* GameplayPresenter.swift in Sources */,
 				DBC1A6432B83B31D00B75E3C /* StartViewController.swift in Sources */,
 				DBA0E6B42B8377EA003CF733 /* LaunchScreenController.swift in Sources */,
@@ -444,6 +459,7 @@
 				DBC1A6462B83C01000B75E3C /* DemoViewController.swift in Sources */,
 				DBD15D412BA394BE00D89CEA /* GameplayCustom.swift in Sources */,
 				DBF3C6DE2BA7342D00FDCAEE /* GameplayAssembly.swift in Sources */,
+				DBF3C6EC2BA866AC00FDCAEE /* StartAssembly.swift in Sources */,
 				DBF3C6E02BA77CE600FDCAEE /* RecordPresenter.swift in Sources */,
 				DB5554232B8FA0080017DA7F /* SettingModel.swift in Sources */,
 				DBA3650E2B9E0C39004B9AF0 /* SettingSelectView.swift in Sources */,

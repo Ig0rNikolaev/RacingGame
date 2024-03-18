@@ -10,6 +10,9 @@ import SnapKit
 
 private extension String {
     static let startImage = "start"
+    static let alertTitle = "Wrong name"
+    static let alertMessage = "Name not found. Add a name in the game settings"
+    static let alertActionTitle = "OK"
 }
 
 private extension CGFloat {
@@ -33,7 +36,15 @@ fileprivate enum ConstantsStart {
     static let stackInset = 20
 }
 
+protocol IStartView: AnyObject {
+    func showAlert()
+}
+
 final class StartViewController: UIViewController {
+    //: MARK: - Propertys
+
+    let presenter: IStartPresenter
+
     //: MARK: - UI Elements
 
     private lazy var imageBackground: UIImageView = {
@@ -94,14 +105,27 @@ final class StartViewController: UIViewController {
         setupBackgroundImage()
     }
 
+    //: MARK: - Initializers
+
+    init(presenter: IStartPresenter) {
+        self.presenter = presenter
+        super.init(nibName: nil, bundle: nil)
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError()
+    }
+
     //: MARK: - Actions
 
     @objc
     func navigationScreen(_ sender: UIButton) {
         switch sender {
         case startButton:
-            let gameplayConroller = GameplayAssembly()
-            navigationFromStart(on: gameplayConroller.build())
+            if !presenter.userAuthentication() {
+                let gameConroller = GameplayAssembly()
+                navigationFromStart(on: gameConroller.build())
+            }
         case settingButton:
             let settingController = SettingAssembly()
             navigationFromStart(on: settingController.builder())
@@ -115,17 +139,17 @@ final class StartViewController: UIViewController {
 
     //: MARK: - Setups
 
-    private func navigationFromStart(on viewController: UIViewController) {
-        if let navigationController {
-            navigationController.pushViewController(viewController, animated: false)
-        }
-    }
-
     private func setupBackgroundImage() {
         UIView.animate(withDuration: .startDuration,
                        delay: .startDelay,
                        options: .curveEaseIn) {
             self.createsAnimation(from: [self.imageBackground, self.stackButtons, self.formulaLogo])
+        }
+    }
+
+    private func navigationFromStart(on viewController: UIViewController) {
+        if let navigationController {
+            navigationController.pushViewController(viewController, animated: false)
         }
     }
 
@@ -160,5 +184,20 @@ final class StartViewController: UIViewController {
             make.top.equalTo(view.snp.centerY).offset(ConstantsStart.backgroundTop)
             make.left.right.bottom.equalTo(ConstantsStart.offset)
         }
+    }
+}
+
+//: MARK: - Extensions
+
+extension StartViewController: IStartView {
+    func showAlert() {
+        let alert = UIAlertController(title: .alertTitle,
+                                      message: .alertMessage,
+                                      preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: .alertActionTitle, style: .default, handler: { _ in
+            let settingController = SettingAssembly()
+            self.navigationFromStart(on: settingController.builder())
+        }))
+        present(alert, animated: true)
     }
 }

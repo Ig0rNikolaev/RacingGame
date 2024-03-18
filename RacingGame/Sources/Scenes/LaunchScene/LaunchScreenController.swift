@@ -64,8 +64,8 @@ final class LaunchScreenController: UIViewController {
 
     private func transitionToStartScreen() {
         if let navigationController {
-            let startController = StartViewController()
-            navigationController.pushViewController(startController, animated: false)
+            let startController = StartAssembly()
+            navigationController.pushViewController(startController.builder(), animated: false)
         }
     }
 
