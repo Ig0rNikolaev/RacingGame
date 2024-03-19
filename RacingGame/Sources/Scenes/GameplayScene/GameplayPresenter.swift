@@ -37,7 +37,7 @@ final class GameplayPresenter: IGameplayPresenter {
 
     func changeGameplaySetting() {
         let user = localStorage.fetchValue(type: UserSetting.self)
-        view?.transmitsGameplaySettings(user)
+        view?.transmitsGameplaySettings(from: user)
     }
 
     func update(score: Int) {

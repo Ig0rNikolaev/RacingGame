@@ -21,7 +21,7 @@ protocol IRecordView: AnyObject {
 final class RecordController: UIViewController {
     //: MARK: - Properties
 
-    let presenter: IRecordPresenter
+    private let presenter: IRecordPresenter
 
     //: MARK: - UI Elements
 

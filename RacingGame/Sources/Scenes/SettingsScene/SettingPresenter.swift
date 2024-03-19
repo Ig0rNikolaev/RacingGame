@@ -9,7 +9,6 @@ import UIKit
 
 private extension Int {
     static let currentStep = 1
-    static let currentZero = 0
 }
 
 private extension String {
@@ -20,14 +19,14 @@ private extension String {
 
 protocol ISettingPresenter {
     func loadUserProfile()
-    func edit(sender: UIBarButtonItem, _ edit: Settings)
+    func controlsEditing(by access: Settings, _ sender: UIBarButtonItem)
     func setsDifficultyLevel(sender: UISegmentedControl, _ duration: Settings)
-    func selectCar(sender: GameSceneButton,
-                   _ view: SettingSelectView,
-                   _ current: Settings)
-    func selectObstacle(sender: GameSceneButton,
-                        _ view: SettingSelectView,
-                        _ current: Settings)
+    func selectCar(by current: Settings,
+                   _ sender: GameSceneButton,
+                   _ view: SettingSelectView)
+    func selectObstacle(by current: Settings,
+                        _ sender: GameSceneButton,
+                        _ view: SettingSelectView)
 }
 
 final class SettingPresenter: ISettingPresenter {
@@ -48,79 +47,82 @@ final class SettingPresenter: ISettingPresenter {
 
     //: MARK: - Setups
 
-    func selectCar(sender: GameSceneButton, 
-                   _ view: SettingSelectView,
-                   _ current: Settings) {
-        selectModels(sender: sender, view, &current.currentCar, model.createCarsModel())
+    func selectCar(by current: Settings,
+                   _ sender: GameSceneButton,
+                   _ view: SettingSelectView) {
+        selectModels(from: model.createCarsModel(),
+                     by: &current.currentCar, sender, view)
     }
 
-    func selectObstacle(sender: GameSceneButton, 
-                        _ view: SettingSelectView,
-                        _ current: Settings) {
-        selectModels(sender: sender, view, &current.currentObstacle, model.createObstaclesModel())
+    func selectObstacle(by current: Settings,
+                        _ sender: GameSceneButton,
+                        _ view: SettingSelectView) {
+        selectModels(from: model.createObstaclesModel(),
+                     by: &current.currentObstacle, sender, view)
     }
 
-    func edit(sender: UIBarButtonItem, _ edit: Settings) {
-        if edit.isEdit {
+    func controlsEditing(by access: Settings, _ sender: UIBarButtonItem) {
+        if access.isEdit {
             sender.title = .editTitle
-            saveUser()
+            saveUserProfile()
         } else {
             sender.title = .saveTitle
         }
-        edit.isEdit.toggle()
-        view?.userInteractionEnabled(edit.isEdit)
-    }
-
-    func saveUser() {
-        var user = UserSetting()
-        let records = localStorage.fetchValue(type: UserSetting.self)?.records
-        view?.updateSettings(&user, imageStorage, records)
-        localStorage.save(user)
+        access.isEdit.toggle()
+        view?.userInteractionEnabled(access.isEdit)
     }
 
     func loadUserProfile() {
         guard let user = localStorage.fetchValue(type: UserSetting.self) else { return }
         let avatar = imageStorage.loadImage(by: user.avatar ?? .defaultAvatar) ?? UIImage()
-        view?.loadUserProfile(user, avatar)
+        view?.preparesLoad(user: user, avatar)
     }
 
     func setsDifficultyLevel(sender: UISegmentedControl, _ duration: Settings) {
        switch sender.selectedSegmentIndex {
        case 0:
-           createSegment(Constant.Duration.roadDurationEasy, 
-                         Constant.Duration.obstacleDurationEasy, duration)
+           sets(duration: duration,
+                for: Constant.Duration.roadDurationEasy,
+                and: Constant.Duration.obstacleDurationEasy)
        case 1:
-           createSegment(Constant.Duration.roadDurationMedium, 
-                         Constant.Duration.obstacleDurationMedium, duration)
+           sets(duration: duration,
+                for: Constant.Duration.roadDurationMedium,
+                and: Constant.Duration.obstacleDurationMedium)
        case 2:
-           createSegment(Constant.Duration.roadDurationHard, 
-                         Constant.Duration.obstacleDurationHard, duration)
+           sets(duration: duration,
+                for: Constant.Duration.roadDurationHard,
+                and: Constant.Duration.obstacleDurationHard)
        default:
            break
        }
    }
 
-    private func selectModels(sender: GameSceneButton, 
-                              _ view: SettingSelectView,
-                              _ current: inout Int,
-                              _ model: [String]) {
+    private func sets(duration: Settings, for road: Double, and obstacle: Double) {
+        duration.roadDuration = road
+        duration.obstacleDuration = obstacle
+    }
+
+    private func saveUserProfile() {
+        var user = UserSetting()
+        let records = localStorage.fetchValue(type: UserSetting.self)?.records
+        view?.preparesSave(user: &user, imageStorage, records)
+        localStorage.save(user)
+    }
+
+    private func selectModels(from model: [String],
+                              by current: inout Int,
+                              _ sender: GameSceneButton,
+                              _ view: SettingSelectView) {
         switch sender {
         case view.createRightButton():
-            if current != model.count - .currentStep  {
-                current += .currentStep
-            }
+            current = (current + .currentStep) % model.count
         case view.createLeftButton():
-            if current > .currentZero {
-                current -= .currentStep
-            }
+            current = (current - .currentStep + model.count) % model.count
         default:
             break
         }
-        self.view?.updateImageSelect(model[current], view)
-    }
-
-    private func createSegment(_ road: Double, _ obstacle: Double, _ duration: Settings) {
-        duration.roadDuration = road
-        duration.obstacleDuration = obstacle
+        if let value = model.getsObject(by: current) {
+            self.view?.updateImageSelect(value, view)
+        }
     }
 }

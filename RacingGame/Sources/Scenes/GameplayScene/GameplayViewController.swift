@@ -44,6 +44,8 @@ private extension CGFloat {
     static let roadHeight: CGFloat = 100
     static let coordinateY: CGFloat = -100
     static let coordinateX: CGFloat = 0
+    static let rightIndent: CGFloat  = 90
+    static let leftIndent: CGFloat  = 45
 }
 
 fileprivate enum GameConstants {
@@ -58,14 +60,14 @@ fileprivate enum GameConstants {
 }
 
 protocol IGameplayView: AnyObject {
-    func transmitsGameplaySettings(_ user: UserSetting?)
+    func transmitsGameplaySettings(from user: UserSetting?)
     func buttonsControll(_ sender: UIButton)
 }
 
 final class GameplayViewController: UIViewController {
     //: MARK: - Properties
 
-    let presenter: IGameplayPresenter
+    private let presenter: IGameplayPresenter
     private let timer = TimerCustom()
     private let gameplayCustom = GameplayCustom(roadDuration: Constant.Duration.roadDurationEasy,
                                                 obstacleDuration: Constant.Duration.obstacleDurationEasy,
@@ -167,7 +169,7 @@ final class GameplayViewController: UIViewController {
     //: MARK: - Setups
 
     private func setupObstacleView() -> UIImageView {
-        let constant = CGFloat.random(in: self.view.safeAreaInsets.left...self.view.bounds.maxX - GameConstants.widthModel)
+        let constant = CGFloat.random(in: .leftIndent...self.view.bounds.width - .rightIndent)
         let imageObstacle = UIImageView()
         imageObstacle.image = UIImage(named: gameplayCustom.obstacle)
         imageObstacle.contentMode = .scaleAspectFill
@@ -219,6 +221,7 @@ final class GameplayViewController: UIViewController {
         timer.timerObstacle = Timer.scheduledTimer(withTimeInterval: .obstacleInterval, 
                                                    repeats: true,
                                                    block: {  _ in
+            RunLoop.current.add(self.timer.timerObstacle ?? Timer(), forMode: .common)
             let imageObstacle = self.setupObstacleView()
             let blocks = self.setsLocationSideBlocks()
             self.setupGameplayAnimation(imageObstacle, 
@@ -234,6 +237,7 @@ final class GameplayViewController: UIViewController {
         timer.timeRoad = Timer.scheduledTimer(withTimeInterval: .roadInterval, 
                                               repeats: true,
                                               block: {  _ in
+            RunLoop.current.add(self.timer.timerObstacle ?? Timer(), forMode: .common)
             let imageRoad = self.setupsRoadView()
             let left = self.setupsSideBlock(.coordinateX)
             let _ = self.setupsSideBlock(self.view.bounds.width - left.frame.width)
@@ -344,7 +348,7 @@ final class GameplayViewController: UIViewController {
 //: MARK: - Extensions
 
 extension GameplayViewController: IGameplayView {
-    func transmitsGameplaySettings(_ user: UserSetting?) {
+    func transmitsGameplaySettings(from user: UserSetting?) {
         gameplayCustom.roadDuration = user?.durationRoad ?? Constant.Duration.roadDurationEasy
         gameplayCustom.obstacleDuration = user?.durationObstacle ?? Constant.Duration.obstacleDurationEasy
         gameplayCustom.obstacle = user?.obstacleImage ?? .obstacleImageDefault
