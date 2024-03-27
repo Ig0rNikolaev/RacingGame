@@ -30,8 +30,7 @@ fileprivate enum ConstantsStart {
     static let offset = 0
     static let backgroundTop = 100
     static let logoTopOffset = 100
-    static let logoWidthOffset = 50
-    static let logoHeightOffset = 50
+    static let logoSizeOffset = 50
     static let stackTopOffset = 50
     static let stackInset = 20
 }
@@ -43,7 +42,7 @@ protocol IStartView: AnyObject {
 final class StartViewController: UIViewController {
     //: MARK: - Propertys
 
-    let presenter: IStartPresenter
+   private let presenter: IStartPresenter
 
     //: MARK: - UI Elements
 
@@ -170,8 +169,7 @@ final class StartViewController: UIViewController {
         formulaLogo.snp.makeConstraints { make in
             make.top.equalTo(ConstantsStart.logoTopOffset)
             make.centerX.equalTo(view.snp.centerX)
-            make.width.equalTo(ConstantsStart.logoWidthOffset)
-            make.height.equalTo(ConstantsStart.logoHeightOffset)
+            make.width.height.equalTo(ConstantsStart.logoSizeOffset)
         }
 
         stackButtons.snp.makeConstraints { make in

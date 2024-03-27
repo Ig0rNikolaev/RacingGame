@@ -9,7 +9,7 @@ import UIKit
 
 fileprivate enum ConstantsButton {
     //: MARK: - Constants
-    
+
     // String
     static let imageLeft = "arrow.left.square.fill"
     static let imageRight = "arrow.right.square.fill"
@@ -17,7 +17,7 @@ fileprivate enum ConstantsButton {
 
 final class GameSceneButton: UIButton {
     //: MARK: - Properties
-    
+
     private var configurationButton: ButtonConfiguration
 
     //MARK: - Initializers

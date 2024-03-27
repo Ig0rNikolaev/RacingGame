@@ -44,17 +44,17 @@ fileprivate enum ConstantsSetting {
 
 protocol ISettingView: AnyObject {
     func userInteractionEnabled(_ isEnabled: Bool)
-    func loadUserProfile(_ user: UserSetting, _ image: UIImage)
+    func preparesLoad(user: UserSetting, _ image: UIImage)
     func updateImageSelect(_ image: String, _ view: SettingSelectView)
-    func updateSettings(_ user: inout UserSetting,
-                        _ imageStorage: IImageStorage,
-                        _ records: [Int]?)
+    func preparesSave(user: inout UserSetting,
+                      _ imageStorage: IImageStorage,
+                      _ records: [Int]?)
 }
 
 final class SettingViewController: UIViewController {
     //: MARK: - Propertys
 
-    var presenter: ISettingPresenter
+    private var presenter: ISettingPresenter
     var setting = Settings(roadDuration: Constant.Duration.roadDurationEasy,
                            obstacleDuration: Constant.Duration.obstacleDurationEasy,
                            isEdit: false,
@@ -67,7 +67,7 @@ final class SettingViewController: UIViewController {
 
     private lazy var profileImage: UIImageView = {
         let image = UIImageView()
-        image.image = UIImage(systemName: .proxyImage)
+        image.image = UIImage(named: "proxy")
         image.tintColor = .systemGray4
         image.contentMode = .scaleAspectFill
         image.clipsToBounds = true
@@ -168,17 +168,17 @@ final class SettingViewController: UIViewController {
 
     @objc
     private func selectCar(sender: GameSceneButton) {
-        presenter.selectCar(sender: sender, settinCar, setting)
+        presenter.selectCar(by: setting, sender, settinCar)
     }
 
     @objc
     private func selectObstacle(sender: GameSceneButton) {
-        presenter.selectObstacle(sender: sender, settinObstacle, setting)
+        presenter.selectObstacle(by: setting, sender, settinObstacle)
     }
 
     @objc
     private func settingEdit(sender: UIBarButtonItem) {
-        presenter.edit(sender: sender, setting)
+        presenter.controlsEditing(by: setting, sender)
     }
 
     @objc
@@ -194,16 +194,16 @@ final class SettingViewController: UIViewController {
 
     private func createCameraMenu() -> UIMenu {
         let barButtonMenu = UIMenu(title: .titleMenu, children: [
-            UIAction(title: .titleActionTake, 
+            UIAction(title: .titleActionTake,
                      image: UIImage(systemName: .imageActionTake),
                      handler: { [weak self] _ in
-                self?.present(self?.profileImageCamera ?? UIImagePickerController(), animated: true)
-            }),
-            UIAction(title: .titleActionSelect, 
+                         self?.present(self?.profileImageCamera ?? UIImagePickerController(), animated: true)
+                     }),
+            UIAction(title: .titleActionSelect,
                      image: UIImage(systemName: .imageActionSelect),
                      handler: { [weak self] _ in
-                self?.present(self?.profileImageLibrary ?? UIImagePickerController(), animated: true)
-            }),
+                         self?.present(self?.profileImageLibrary ?? UIImagePickerController(), animated: true)
+                     }),
         ])
         return barButtonMenu
     }
@@ -245,10 +245,6 @@ final class SettingViewController: UIViewController {
             make.height.equalTo(ConstantsSetting.stackSelectHeight)
         }
     }
-
-    deinit {
-        print("deinit Setting Camera")
-    }
 }
 
 //: MARK: - Extensions
@@ -261,9 +257,9 @@ extension SettingViewController: ISettingView {
         stackSetting.isUserInteractionEnabled = isEnabled
     }
 
-    func updateSettings(_ user: inout UserSetting,
-                        _ imageStorage: IImageStorage,
-                        _ records: [Int]?) {
+    func preparesSave(user: inout UserSetting,
+                      _ imageStorage: IImageStorage,
+                      _ records: [Int]?) {
         user.name = profileNameText.text
         user.durationRoad = setting.roadDuration
         user.carImage = settinCar.baseModel.imageCar
@@ -276,15 +272,15 @@ extension SettingViewController: ISettingView {
         }
     }
 
-    func loadUserProfile( _ user: UserSetting, _ image: UIImage) {
+    func preparesLoad(user: UserSetting, _ image: UIImage) {
         profileNameText.text = user.name ?? .userNameDefault
         setting.roadDuration = user.durationRoad ?? Constant.Duration.roadDurationZero
         setting.obstacleDuration = user.durationObstacle ?? Constant.Duration.obstacleDurationZero
         settinCar.baseModel.imageCar = user.carImage ?? Constant.Image.carOne
-        settinCar.baseModel.imageObstacle = user.obstacleImage ?? Constant.Image.carTwo
+        settinObstacle.baseModel.imageObstacle = user.obstacleImage ?? Constant.Image.carTwo
         difficultyLevelControl.selectedSegmentIndex = user.segmentLevel ?? .segmentIndex
         settinCar.imageSetting.image = UIImage(named: settinCar.baseModel.imageCar)
-        settinObstacle.imageSetting.image = UIImage(named: settinCar.baseModel.imageObstacle)
+        settinObstacle.imageSetting.image = UIImage(named: settinObstacle.baseModel.imageObstacle)
         profileImage.image = image
     }
 
