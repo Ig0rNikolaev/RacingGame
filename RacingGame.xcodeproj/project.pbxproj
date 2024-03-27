@@ -20,7 +20,6 @@
 		DBA3650E2B9E0C39004B9AF0 /* SettingSelectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBA3650D2B9E0C39004B9AF0 /* SettingSelectView.swift */; };
 		DBA365112B9F398F004B9AF0 /* UserSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBA365102B9F398F004B9AF0 /* UserSetting.swift */; };
 		DBC1A6432B83B31D00B75E3C /* StartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC1A6422B83B31D00B75E3C /* StartViewController.swift */; };
-		DBC1A6462B83C01000B75E3C /* DemoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC1A6452B83C01000B75E3C /* DemoViewController.swift */; };
 		DBC1A6482B83C7C000B75E3C /* StartSceneButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC1A6472B83C7C000B75E3C /* StartSceneButton.swift */; };
 		DBC1A64D2B83E02700B75E3C /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC1A64C2B83E02700B75E3C /* Constant.swift */; };
 		DBC1A6602B83EE4A00B75E3C /* Formula1-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = DBC1A65F2B83EE4900B75E3C /* Formula1-Regular.otf */; };
@@ -62,7 +61,6 @@
 		DBA3650D2B9E0C39004B9AF0 /* SettingSelectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingSelectView.swift; sourceTree = "<group>"; };
 		DBA365102B9F398F004B9AF0 /* UserSetting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSetting.swift; sourceTree = "<group>"; };
 		DBC1A6422B83B31D00B75E3C /* StartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartViewController.swift; sourceTree = "<group>"; };
-		DBC1A6452B83C01000B75E3C /* DemoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoViewController.swift; sourceTree = "<group>"; };
 		DBC1A6472B83C7C000B75E3C /* StartSceneButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartSceneButton.swift; sourceTree = "<group>"; };
 		DBC1A64C2B83E02700B75E3C /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
 		DBC1A65F2B83EE4900B75E3C /* Formula1-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Formula1-Regular.otf"; sourceTree = "<group>"; };
@@ -236,7 +234,6 @@
 				DBC1A65F2B83EE4900B75E3C /* Formula1-Regular.otf */,
 				DBA365102B9F398F004B9AF0 /* UserSetting.swift */,
 				DBC1A66B2B84CBA000B75E3C /* GameSceneButton.swift */,
-				DBC1A6452B83C01000B75E3C /* DemoViewController.swift */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -459,7 +456,6 @@
 				DBCE8D872B8D133600F19D3D /* RecordController.swift in Sources */,
 				DBD15D432BA397C700D89CEA /* BaseGameModel.swift in Sources */,
 				DBA0E6B22B8377EA003CF733 /* SceneDelegate.swift in Sources */,
-				DBC1A6462B83C01000B75E3C /* DemoViewController.swift in Sources */,
 				DBF3C7062BA9978B00FDCAEE /* Extansion+Array.swift in Sources */,
 				DBD15D412BA394BE00D89CEA /* GameplayCustom.swift in Sources */,
 				DBF3C6DE2BA7342D00FDCAEE /* GameplayAssembly.swift in Sources */,

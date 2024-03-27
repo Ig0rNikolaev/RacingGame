@@ -149,14 +149,15 @@ final class GameplayViewController: UIViewController {
     func buttonsControll(_ sender: UIButton) {
         timer.timerCarPlayer = Timer.scheduledTimer(withTimeInterval: .controlInterval,
                                                     repeats: true,
-                                                    block: { _ in
+                                                    block: { [weak self] _ in
+            guard let strongSelf = self else { return }
             UIView.animate(withDuration: .controlAnimation,
                            delay: .controlAnimation,
                            options: .curveLinear) {
-                self.presenter.gameControl(sender,
-                                           self.imageCarPlayer,
-                                           self.buttonLeft,
-                                           self.buttonRight)
+                strongSelf.presenter.gameControl(sender,
+                                                 strongSelf.imageCarPlayer,
+                                                 strongSelf.buttonLeft,
+                                                 strongSelf.buttonRight)
             }
         })
     }
@@ -218,37 +219,39 @@ final class GameplayViewController: UIViewController {
     }
 
     private func createsObstacles() {
-        timer.timerObstacle = Timer.scheduledTimer(withTimeInterval: .obstacleInterval, 
+        timer.timerObstacle = Timer.scheduledTimer(withTimeInterval: .obstacleInterval,
                                                    repeats: true,
-                                                   block: {  _ in
-            RunLoop.current.add(self.timer.timerObstacle ?? Timer(), forMode: .common)
-            let imageObstacle = self.setupObstacleView()
-            let blocks = self.setsLocationSideBlocks()
-            self.setupGameplayAnimation(imageObstacle, 
-                                        self.gameplayCustom.obstacleDuration,
-                                        self.updatesСounter)
-            self.setupIntersects(imageObstacle, 
-                                 blocks.leftBlock,
-                                 blocks.rightBlock)
+                                                   block: { [weak self] _ in
+            guard let strongSelf = self else { return }
+            RunLoop.current.add(strongSelf.timer.timerObstacle ?? Timer(), forMode: .common)
+            let imageObstacle = strongSelf.setupObstacleView()
+            let blocks = strongSelf.setsLocationSideBlocks()
+            strongSelf.setupGameplayAnimation(imageObstacle,
+                                              strongSelf.gameplayCustom.obstacleDuration,
+                                              strongSelf.updatesСounter)
+            strongSelf.setupIntersects(imageObstacle,
+                                       blocks.leftBlock,
+                                       blocks.rightBlock)
         })
     }
 
     private func createRoadWithSideBlocks() {
-        timer.timeRoad = Timer.scheduledTimer(withTimeInterval: .roadInterval, 
+        timer.timeRoad = Timer.scheduledTimer(withTimeInterval: .roadInterval,
                                               repeats: true,
-                                              block: {  _ in
-            RunLoop.current.add(self.timer.timerObstacle ?? Timer(), forMode: .common)
-            let imageRoad = self.setupsRoadView()
-            let left = self.setupsSideBlock(.coordinateX)
-            let _ = self.setupsSideBlock(self.view.bounds.width - left.frame.width)
-            self.setupGameplayAnimation(imageRoad, self.gameplayCustom.roadDuration, nil)
+                                              block: { [weak self] _ in
+            guard let strongSelf = self else { return }
+            RunLoop.current.add(strongSelf.timer.timerObstacle ?? Timer(), forMode: .common)
+            let imageRoad = strongSelf.setupsRoadView()
+            let left = strongSelf.setupsSideBlock(.coordinateX)
+            let _ = strongSelf.setupsSideBlock(strongSelf.view.bounds.width - left.frame.width)
+            strongSelf.setupGameplayAnimation(imageRoad, strongSelf.gameplayCustom.roadDuration, nil)
         })
     }
 
-    private func setupGameplayAnimation(_ imageView: UIImageView, 
+    private func setupGameplayAnimation(_ imageView: UIImageView,
                                         _ duration: TimeInterval,
                                         _ score: (() -> Void)?) {
-        UIView.animate(withDuration: duration, 
+        UIView.animate(withDuration: duration,
                        delay: .backgroundDelay,
                        options: .curveLinear) {
             imageView.center.y += self.view.frame.height + GameConstants.heightModel
@@ -286,12 +289,12 @@ final class GameplayViewController: UIViewController {
         presenter.changeGameplaySetting()
     }
 
-    private func setupIntersects(_ imageObstacle: UIImageView, 
+    private func setupIntersects(_ imageObstacle: UIImageView,
                                  _ leftBlock: CGRect,
                                  _ rightBlock: CGRect) {
         timer.timeIntersects = Timer.scheduledTimer(withTimeInterval: .intersectsInterval,
                                                     repeats: true) { [weak self, weak imageObstacle] _ in
-            if let imagePlayer = self?.imageCarPlayer.layer.presentation()?.frame, 
+            if let imagePlayer = self?.imageCarPlayer.layer.presentation()?.frame,
                 let obstacle = imageObstacle?.layer.presentation()?.frame {
                 if imagePlayer.intersects(obstacle) || imagePlayer.intersects(leftBlock) || imagePlayer.intersects(rightBlock) {
                     self?.invalidatesTimers()
@@ -338,10 +341,6 @@ final class GameplayViewController: UIViewController {
             make.height.equalTo(GameConstants.buttonSize)
             make.width.equalTo(GameConstants.buttonSize)
         }
-    }
-
-    deinit {
-        print("GAME DEINIT")
     }
 }
 

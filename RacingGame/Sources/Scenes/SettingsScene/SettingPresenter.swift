@@ -31,10 +31,10 @@ protocol ISettingPresenter {
 
 final class SettingPresenter: ISettingPresenter {
     //: MARK: - Propertys
-    
+
     weak var view: ISettingView?
     private var model: IModelSetting
-    private var imageStorage: ImageStorage 
+    private var imageStorage: ImageStorage
     private var localStorage: ILocalStorage
 
     //: MARK: - Initializers
@@ -79,23 +79,23 @@ final class SettingPresenter: ISettingPresenter {
     }
 
     func setsDifficultyLevel(sender: UISegmentedControl, _ duration: Settings) {
-       switch sender.selectedSegmentIndex {
-       case 0:
-           sets(duration: duration,
-                for: Constant.Duration.roadDurationEasy,
-                and: Constant.Duration.obstacleDurationEasy)
-       case 1:
-           sets(duration: duration,
-                for: Constant.Duration.roadDurationMedium,
-                and: Constant.Duration.obstacleDurationMedium)
-       case 2:
-           sets(duration: duration,
-                for: Constant.Duration.roadDurationHard,
-                and: Constant.Duration.obstacleDurationHard)
-       default:
-           break
-       }
-   }
+        switch sender.selectedSegmentIndex {
+        case 0:
+            sets(duration: duration,
+                 for: Constant.Duration.roadDurationEasy,
+                 and: Constant.Duration.obstacleDurationEasy)
+        case 1:
+            sets(duration: duration,
+                 for: Constant.Duration.roadDurationMedium,
+                 and: Constant.Duration.obstacleDurationMedium)
+        case 2:
+            sets(duration: duration,
+                 for: Constant.Duration.roadDurationHard,
+                 and: Constant.Duration.obstacleDurationHard)
+        default:
+            break
+        }
+    }
 
     private func sets(duration: Settings, for road: Double, and obstacle: Double) {
         duration.roadDuration = road

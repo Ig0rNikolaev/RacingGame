@@ -19,7 +19,7 @@ final class Constant {
         static let radius: CGFloat = 7
         static let borderWidth: CGFloat = 1
     }
-
+    
     enum Duration {
         static let roadDurationEasy = 3.0
         static let obstacleDurationEasy = 4.0
@@ -30,7 +30,7 @@ final class Constant {
         static let roadDurationZero = 0.0
         static let obstacleDurationZero = 0.0
     }
-
+    
     enum Image {
         static let formulaLogo = "lauching"
         static let road = "road"

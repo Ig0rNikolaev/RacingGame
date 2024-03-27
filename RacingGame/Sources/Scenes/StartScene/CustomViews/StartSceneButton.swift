@@ -17,21 +17,21 @@ final class StartSceneButton: UIButton {
     //: MARK: - Properties
     
     private var configurationButton: ButtonConfiguration
-
+    
     //MARK: - Initializers
-
+    
     init(configurationButton: ButtonConfiguration) {
         self.configurationButton = configurationButton
         super.init(frame: .zero)
         setupButton()
     }
-
+    
     required init?(coder: NSCoder) {
         fatalError()
     }
-
+    
     //MARK: - Setups
-
+    
     private func setups(title: String) {
         setTitle(title, for: .normal)
         setTitleColor(UIColor.systemGray6, for: .normal)
@@ -42,7 +42,7 @@ final class StartSceneButton: UIButton {
         layer.cornerRadius = Constant.Default.radius
         layer.borderWidth = Constant.Default.borderWidth
     }
-
+    
     private func setupButton() {
         switch configurationButton {
         case .start:

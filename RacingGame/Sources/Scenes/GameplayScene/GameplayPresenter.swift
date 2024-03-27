@@ -12,6 +12,10 @@ private extension CGFloat {
     static let step: CGFloat = 1
 }
 
+private extension Int {
+    static let recordCount = 10
+}
+
 protocol IGameplayPresenter {
     func update(score: Int)
     func changeGameplaySetting()
@@ -43,7 +47,7 @@ final class GameplayPresenter: IGameplayPresenter {
     func update(score: Int) {
         var user = localStorage.fetchValue(type: UserSetting.self)
         if var records = user?.records {
-            if records.count == 10 {
+            if records.count == .recordCount {
                 records.removeLast()
             }
             records.append(score)
@@ -53,8 +57,8 @@ final class GameplayPresenter: IGameplayPresenter {
         }
         localStorage.save(user)
     }
-
-    func gameControl(_ sender: UIButton, 
+    
+    func gameControl(_ sender: UIButton,
                      _ carImage: UIImageView,
                      _ left: GameSceneButton,
                      _ right: GameSceneButton) {

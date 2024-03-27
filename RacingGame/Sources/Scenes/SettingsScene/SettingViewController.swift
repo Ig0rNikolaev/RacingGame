@@ -47,8 +47,8 @@ protocol ISettingView: AnyObject {
     func preparesLoad(user: UserSetting, _ image: UIImage)
     func updateImageSelect(_ image: String, _ view: SettingSelectView)
     func preparesSave(user: inout UserSetting,
-                        _ imageStorage: IImageStorage,
-                        _ records: [Int]?)
+                      _ imageStorage: IImageStorage,
+                      _ records: [Int]?)
 }
 
 final class SettingViewController: UIViewController {
@@ -194,16 +194,16 @@ final class SettingViewController: UIViewController {
 
     private func createCameraMenu() -> UIMenu {
         let barButtonMenu = UIMenu(title: .titleMenu, children: [
-            UIAction(title: .titleActionTake, 
+            UIAction(title: .titleActionTake,
                      image: UIImage(systemName: .imageActionTake),
                      handler: { [weak self] _ in
-                self?.present(self?.profileImageCamera ?? UIImagePickerController(), animated: true)
-            }),
-            UIAction(title: .titleActionSelect, 
+                         self?.present(self?.profileImageCamera ?? UIImagePickerController(), animated: true)
+                     }),
+            UIAction(title: .titleActionSelect,
                      image: UIImage(systemName: .imageActionSelect),
                      handler: { [weak self] _ in
-                self?.present(self?.profileImageLibrary ?? UIImagePickerController(), animated: true)
-            }),
+                         self?.present(self?.profileImageLibrary ?? UIImagePickerController(), animated: true)
+                     }),
         ])
         return barButtonMenu
     }
@@ -245,10 +245,6 @@ final class SettingViewController: UIViewController {
             make.height.equalTo(ConstantsSetting.stackSelectHeight)
         }
     }
-
-    deinit {
-        print("deinit Setting Camera")
-    }
 }
 
 //: MARK: - Extensions
@@ -262,8 +258,8 @@ extension SettingViewController: ISettingView {
     }
 
     func preparesSave(user: inout UserSetting,
-                        _ imageStorage: IImageStorage,
-                        _ records: [Int]?) {
+                      _ imageStorage: IImageStorage,
+                      _ records: [Int]?) {
         user.name = profileNameText.text
         user.durationRoad = setting.roadDuration
         user.carImage = settinCar.baseModel.imageCar
